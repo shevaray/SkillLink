@@ -1,0 +1,41 @@
+<div class="d-flex flex-column align-items-center justify-content-center" >
+  <div class="card shadow py-4 px-5" style=" width: 550px;">
+    <h3 class="mb-4 fw-semibold">Login Account</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="mb-3">
+        <label for="email" class="form-label fw-semibold">Email Address</label>
+        <input id="email" type="email" class="form-control" formControlName="email" placeholder="Email Address">
+        <div *ngIf="submitted && loginForm.get('email')?.invalid" class="text-danger small mt-1">
+          <span *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</span>
+          <span *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email address.</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label fw-semibold">Password</label>
+        <div class="input-group">
+          <input [type]="passwordVisible ? 'text' : 'password'" id="password" class="form-control" formControlName="password" placeholder="Password">
+          <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()" tabindex="-1">
+            <i class="bi" [ngClass]="passwordVisible ? 'bi-eye-slash' : 'bi-eye'" aria-label="Toggle password visibility"></i>
+          </button>
+        </div>
+        <div *ngIf="submitted && loginForm.get('password')?.invalid" class="text-danger small mt-1">
+          <span *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</span>
+          <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters.</span>
+        </div>
+      </div>
+      <div class="mb-3 text-start">
+        <a routerLink="/onboarding/forgot-password" class="small">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn btn-primary w-100 fw-semibold">Continue</button>
+    </form>
+    <div class="d-flex align-items-center my-3">
+      <hr class="flex-grow-1 me-2" />
+      <span class="text-muted">OR</span>
+      <hr class="flex-grow-1 ms-2" />
+    </div>
+    <div class="text-center">
+      <span class="me-2">New to Skill Links?</span>
+      <a routerLink="/onboarding/register" class="fw-semibold text-primary">Sign up</a>
+    </div>
+  </div>
+</div>

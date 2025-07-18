@@ -1,0 +1,68 @@
+<div class="register-container d-flex flex-column align-items-center justify-content-center">
+  <div class="register-card card shadow py-4 px-5" style="max-width: 500px; width: 500px;">
+    <h3 class="mb-3 fw-semibold">Welcome to Skill Links</h3>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="mb-3">
+        <label for="fullName" class="form-label fw-semibold">Full Name</label>
+        <input id="fullName" type="text" class="form-control" formControlName="fullName" placeholder="Full Name">
+        <div *ngIf="submitted && registerForm.get('fullName')?.invalid" class="text-danger small mt-1">
+          Full Name is required and must be less than 50 characters.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label fw-semibold">Email Address</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <input id="email" type="email" class="form-control" formControlName="email" placeholder="Email Address">
+        </div>
+        <div *ngIf="submitted && registerForm.get('email')?.invalid" class="text-danger small mt-1">
+          Please enter a valid email address.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label fw-semibold">Password</label>
+        <div class="input-group">
+          <input [type]="passwordVisible ? 'text' : 'password'" id="password" class="form-control" formControlName="password" placeholder="Password">
+          <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()" tabindex="-1">
+            <i class="bi" [ngClass]="passwordVisible ? 'bi-eye-slash' : 'bi-eye'" aria-label="Toggle password visibility"></i>
+          </button>
+        </div>
+        <div *ngIf="submitted && registerForm.get('password')?.invalid" class="text-danger small mt-1">
+          Password is required (min 8 characters).
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label fw-semibold">Confirm Password</label>
+        <div class="input-group">
+          <input [type]="confirmPasswordVisible ? 'text' : 'password'" id="confirmPassword" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
+          <button type="button" class="btn btn-outline-secondary" (click)="toggleConfirmPasswordVisibility()" tabindex="-1">
+            <i class="bi" [ngClass]="confirmPasswordVisible ? 'bi-eye-slash' : 'bi-eye'" aria-label="Toggle confirm password visibility"></i>
+          </button>
+        </div>
+        <div *ngIf="submitted && (registerForm.get('confirmPassword')?.invalid || registerForm.errors?.['passwordMismatch'])" class="text-danger small mt-1">
+          <span *ngIf="registerForm.get('confirmPassword')?.invalid">Please confirm your password.</span>
+          <span *ngIf="registerForm.errors?.['passwordMismatch']">There is a password mismatch. Please reconfirm.</span>
+        </div>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="terms" formControlName="terms">
+        <label class="form-check-label small" for="terms">
+          I agree to Skill links <span class="text-primary"> Terms and Conditions, Intellectual Property Policy</span> and <span class="text-primary">Privacy Policy.</span> 
+        </label>
+        <div *ngIf="submitted && registerForm.get('terms')?.invalid" class="text-danger small mt-1">
+          You must agree before submitting.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary w-100 fw-semibold">Create Account</button>
+    </form>
+    <div class="d-flex align-items-center my-3">
+      <hr class="flex-grow-1 me-2" />
+      <span class="text-muted">OR</span>
+      <hr class="flex-grow-1 ms-2" />
+    </div>
+    <div class="text-center">
+      <span class="me-2 fw-semibold">Already use Skill links?</span>
+      <a routerLink="/onboarding/login" class="fw-semibold text-primary">Log in</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+.verify-email-card {
+  border-radius: 16px;
+  box-shadow: 0px 9px 20px 0px rgba(47, 71, 123, 0.09);
+  background: #fff;
+  padding: 32px 64px 76px;
+  width: 555px;
+}
+
+.verify-title {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.5;
+  color: #101828;
+  text-align: left;
+}
+
+.verify-desc {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.5;
+  color: #101828;
+  text-align: left;
+  width: 85%;
+}
+
+.verify-link {
+  font-family: 'Codec Pro', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #6C57DB !important;
+  line-height: 1.43;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
