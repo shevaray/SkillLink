@@ -1,28 +1,47 @@
-.verify-email-card {
-  border-radius: 16px;
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+.card {
+  border-radius: 8px;
   box-shadow: 0px 9px 20px 0px rgba(47, 71, 123, 0.09);
   background: #fff;
-  padding: 32px 64px 76px;
-  width: 555px;
+  width: 100%;
+  max-width: 550px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @include media-breakpoint-up(md) {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
 }
 
 .verify-title {
   font-family: 'Manrope', Arial, Helvetica, sans-serif;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 1.5;
   color: #101828;
-  text-align: left;
+  text-align: center;
+  @include media-breakpoint-up(md) {
+    font-size: 20px;
+    text-align: left;
+  }
 }
 
 .verify-desc {
   font-family: 'Manrope', Arial, Helvetica, sans-serif;
   font-weight: 400;
-  font-size: 19px;
+  font-size: 1rem;
   line-height: 1.5;
   color: #101828;
-  text-align: left;
-  width: 85%;
+  text-align: center;
+  width: 100%;
+  @include media-breakpoint-up(md) {
+    font-size: 19px;
+    text-align: left;
+    width: 85%;
+  }
 }
 
 .verify-link {

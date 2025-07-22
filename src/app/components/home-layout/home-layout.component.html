@@ -1,0 +1,6 @@
+<app-navbar></app-navbar>
+<main class="main-content">
+  <app-firsttimeuser *ngIf="userService.isFirstTimeUser"></app-firsttimeuser>
+  <app-regular-dashboard *ngIf="!userService.isFirstTimeUser"></app-regular-dashboard>
+</main>
+<app-footer></app-footer> 

@@ -1,0 +1,31 @@
+<nav class="figma-navbar d-flex align-items-center justify-content-between px-4" style="height: 100px; background: rgba(255,255,255,0.72); box-shadow: 0px 4px 16px 0px rgba(47, 71, 123, 0.07); backdrop-filter: blur(21.4px);">
+  <!-- Logo -->
+  <div class="d-flex align-items-center" style="gap: 16px;">
+    <img src="/assets/SVG.png" alt="Skill Link Logo" height="36" style="object-fit: contain;" />
+    <span class="figma-navbar__brand">Skill Link</span>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="figma-navbar__search d-flex align-items-center position-relative" style="width: 420px; height: 44px; background: #fff; border: 1px solid #BABECA; border-radius: 20px;">
+    <input type="text" class="figma-navbar__search-input" placeholder="Search skills" style="border: none; outline: none; background: transparent; padding: 0 48px 0 24px; width: 100%; height: 100%; font-family: 'Manrope', sans-serif; font-size: 14px; color: #131D38; font-weight: 400;" />
+    <span class="figma-navbar__search-icon position-absolute end-0 top-50 translate-middle-y me-3" style="width: 28px; height: 28px; background: #6C57DB; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+      <img src="/assets/mynaui_search.png" alt="Search" width="18" height="18" />
+    </span>
+  </div>
+
+  <!-- Account & Log out -->
+  <div class="d-flex align-items-center" style="gap: 38px;">
+    <div class="position-relative">
+      <!-- Your Account Button -->
+      <button class="figma-navbar__account-btn d-flex align-items-center" style="height: 50px; width: 215px; background: #6C57DB; border-radius: 26px; border: none; gap: 8px; padding: 0 24px;" (click)="openAccountMenu()">
+        <img src="/assets/ix_user-profile.png" alt="User" width="27" height="27" />
+        <span style="font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 600; color: #fff;">Your Account</span>
+        <img src="/assets/gridicons_dropdown.png" alt="Dropdown" width="24" height="24" />
+      </button>
+      <!-- Account Menu Dropdown -->
+      <app-account-menu *ngIf="showAccountMenu" (close)="closeAccountMenu()"></app-account-menu>
+    </div>
+    <!-- Log out -->
+    <span class="figma-navbar__logout" style="font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 600; color: #333; cursor: pointer;">Log out</span>
+  </div>
+</nav> 

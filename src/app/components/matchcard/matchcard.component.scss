@@ -1,0 +1,162 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+.matchcard {
+  width: 373px;
+  background: #fff;
+  border-radius: 14.27px 14.27px 0 0;
+  box-shadow: 0 2px 8px rgba(47, 71, 123, 0.08);
+  border: 0.92px solid #DEDEDE;
+  padding: 28px 21px 24px 21px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.matchcard__header {
+  gap: 14px;
+}
+
+.matchcard__avatar {
+  width: 31px;
+  height: 31px;
+  background: #1D1D1D;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.matchcard__initials {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: #fff;
+  line-height: 1.04em;
+}
+
+.matchcard__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.matchcard__name {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 14.7px;
+  color: #131313;
+}
+
+.matchcard__match {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.matchcard__match-dot {
+  width: 6px;
+  height: 6px;
+  background: #6C57DB;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.matchcard__match-label {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #5D5A5A;
+  line-height: 2.32em;
+}
+
+.matchcard__body {
+  margin-top: 19px;
+}
+
+.matchcard__teaches {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 15.4px;
+  color: #6C57DB;
+}
+
+.matchcard__teaches span {
+  color: #6C57DB;
+}
+
+.matchcard__desc {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 14.7px;
+  color: #4C4949;
+  line-height: 1.5em;
+}
+
+.matchcard__divider {
+  width: 100%;
+  height: 1px;
+  background: #D7D7D7;
+  margin: 0;
+}
+
+.matchcard__footer {
+  margin-top: 21px;
+  gap: 12px;
+}
+
+.matchcard__learn-label {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 13.4px;
+  color: #000;
+}
+
+.matchcard__learn-skill {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 12.9px;
+  color: #6C57DB;
+}
+
+.matchcard__actions {
+  gap: 8px;
+}
+
+.matchcard__btn {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 12.9px;
+  border-radius: 86.68px;
+  padding: 8.7px 20.8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+
+.matchcard__btn--primary {
+  background: #6C57DB;
+  color: #fff;
+  border: none;
+}
+
+.matchcard__btn--primary:hover {
+  background: #5846b7;
+}
+
+.matchcard__btn--outline {
+  background: #fff;
+  color: #6C57DB;
+  border: 0.92px solid #6C57DB;
+}
+
+.matchcard__btn--outline:hover {
+  background: #f5f5fa;
+}
+
+@media (max-width: 500px) {
+  .matchcard {
+    width: 98vw;
+    padding: 16px 4vw;
+  }
+} 

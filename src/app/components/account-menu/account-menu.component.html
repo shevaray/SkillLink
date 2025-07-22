@@ -1,0 +1,31 @@
+<div class="account-menu__dropdown animate-in">
+  <!-- Close Button -->
+  <button class="account-menu__close" (click)="close.emit()">
+    <img src="/assets/account-menu/icon-close.svg" alt="Close" width="29" height="29" />
+  </button>
+  <!-- Title -->
+  <div class="account-menu__title">Your Account</div>
+  <!-- Nav Menu -->
+  <nav class="account-menu__nav">
+    <a class="account-menu__item" routerLink="/home" routerLinkActive="active">
+      <img src="/assets/account-menu/icon-home.svg" alt="Dashboard" width="24" height="24" />
+      <span>Dashboard</span>
+    </a>
+    <a class="account-menu__item" href="#">
+      <img src="/assets/account-menu/icon-profile.svg" alt="Profile Information" width="27" height="27" />
+      <span>Profile Information</span>
+    </a>
+    <a class="account-menu__item" href="#">
+      <img src="/assets/account-menu/icon-message.svg" alt="Message" width="27" height="27" />
+      <span>Message</span>
+    </a>
+    <a class="account-menu__item" href="#">
+      <img src="/assets/account-menu/icon-notification.svg" alt="Notifications" width="27" height="27" />
+      <span>Notifications</span>
+    </a>
+    <a class="account-menu__item" href="#">
+      <img src="/assets/account-menu/icon-session.svg" alt="Sessions" width="27" height="27" />
+      <span>Sessions</span>
+    </a>
+  </nav>
+</div> 

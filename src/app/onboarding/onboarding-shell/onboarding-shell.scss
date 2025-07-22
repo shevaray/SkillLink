@@ -1,3 +1,7 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
 .onboarding-shell-container {
   display: flex;
   flex-direction: column;
@@ -5,10 +9,30 @@
 
 }
 
-.onboarding-shell-container main {
-  display: flex;
+.onboarding-shell-container header {
+  padding-left: 1rem;
+  padding-right: 1rem;
   flex-direction: column;
-  align-items: center;
- 
-  flex: 1 0 auto;
+  @include media-breakpoint-up(md) {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    flex-direction: row;
+  }
+}
+
+.onboarding-shell-container main {
+  width: 100%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  @include media-breakpoint-up(md) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.fs-3 {
+  font-size: 1.5rem;
+  @include media-breakpoint-up(md) {
+    font-size: 2rem;
+  }
 }
