@@ -26,12 +26,13 @@
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 108px 122px 0 122px;
+  padding: 0px 122px 0 122px;
   min-height: 334px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+
 }
 
 .figma-footer__brand {
@@ -48,6 +49,13 @@
   color: #fff;
 }
 
+.footer-logo-con{
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+ 
+}
+
 .figma-footer__copyright {
   font-family: 'Manrope', Arial, Helvetica, sans-serif;
   font-weight: 400;
@@ -58,7 +66,7 @@
 }
 
 .figma-footer__social {
-  gap: 40px;
+  gap: 80px;
   min-width: 337px;
   height: 76px;
 }
@@ -78,7 +86,7 @@
 .figma-footer__contact {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 17px;
   width: 226px;
 }
 

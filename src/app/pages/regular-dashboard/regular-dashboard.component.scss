@@ -2,9 +2,18 @@
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/mixins';
 
+.dashboard-container {
+  padding-left: 100px;
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+
 .dashboard-hero {
-  margin: 60px auto 32px auto;
   max-width: 900px;
+ 
 }
 
 .dashboard-hero__avatar {
@@ -19,29 +28,29 @@
 
 .dashboard-hero__welcome {
   font-family: 'Manrope', Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  font-size: 36px;
+  font-weight: 500;
+  font-size: 30px;
   color: #131313;
 }
 
 .dashboard-hero__edit {
   font-family: 'Manrope', Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 14px;
   color: #6C57DB;
   margin-top: 8px;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .dashboard-section {
   max-width: 1200px;
-  margin: 0 auto 48px auto;
 }
 
 .dashboard-section__title {
   font-family: 'Manrope', Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  font-size: 28px;
+  font-weight: 400;
+  font-size: 25px;
   color: #333;
 }
 

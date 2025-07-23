@@ -31,7 +31,7 @@ export class LoginComponent {
     this.submitted = true;
     if (this.loginForm.valid) {
       // Simulate backend response
-      const isFirstTimeUser = false; // Replace with real backend value
+      const isFirstTimeUser = true; // Replace with real backend value
       this.userService.setFirstTimeUser(isFirstTimeUser);
       this.router.navigate(['/home']);
     }

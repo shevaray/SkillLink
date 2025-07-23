@@ -1,5 +1,8 @@
 <app-navbar></app-navbar>
 <main class="main-content">
+  <div class="banner-out">
+    <p class="banner-out__text">Learn. Tech. <br> <span class="banner-out__text-highlight">Exchange</span> </p>
+  </div>
   <app-firsttimeuser *ngIf="userService.isFirstTimeUser"></app-firsttimeuser>
   <app-regular-dashboard *ngIf="!userService.isFirstTimeUser"></app-regular-dashboard>
 </main>

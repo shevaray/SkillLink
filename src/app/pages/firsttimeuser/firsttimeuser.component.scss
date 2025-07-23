@@ -2,31 +2,43 @@
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/mixins';
 
+
+.dashboard-container {
+  padding-left: 100px;
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom:250px;
+
+}
+
+
 .firsttimeuser-hero {
-  margin: 60px auto 32px auto;
+
   max-width: 650px;
 }
 
 .firsttimeuser-hero__welcome-text {
   font-family: 'Manrope', Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  font-size: 40px;
+  font-weight: 500;
+  font-size: 35px;
   color: #333;
 }
 
 .firsttimeuser-hero__subtitle {
   font-family: 'Manrope', Arial, Helvetica, sans-serif;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 22px;
+  width: 50%;
   color: #666;
 }
 
 .firsttimeuser-profile-card {
   background: #fff;
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(47, 71, 123, 0.12);
+
   max-width: 650px;
-  margin: 0 auto 60px auto;
   padding: 32px 24px 40px 24px;
   display: flex;
   flex-direction: column;
