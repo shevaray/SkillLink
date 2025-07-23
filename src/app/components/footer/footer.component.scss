@@ -108,32 +108,22 @@
 
 @media (max-width: 1200px) {
   .figma-footer__content {
-    padding: 64px 32px 0 32px;
+    padding: 0px 32px 0 32px;
   }
 }
-@media (max-width: 900px) {
+
+@media (max-width: 630px) {
   .figma-footer__content {
+    padding-top: 32px;
+    padding-bottom: 32px;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 32px;
-    padding: 64px 16px 0 16px;
-  }
-  .figma-footer__brand, .figma-footer__contact {
-    width: 100%;
-  }
-  .figma-footer__social {
-    min-width: 0;
-    width: 100%;
-    gap: 16px;
-    justify-content: flex-start;
-  }
-}
-@media (max-width: 600px) {
-  .figma-footer__content {
-    padding: 32px 8px 0 8px;
+    align-items:start !important;
+
   }
   .figma-footer__bg {
-    height: 400px;
+    height: 500px;
     border-radius: 32px 32px 0 0;
   }
 } 

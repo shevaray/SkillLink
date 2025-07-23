@@ -184,6 +184,7 @@ img[alt="Skill Link Logo"] {
 
 @media (max-width: 991.98px) {
   .figma-navbar {
+    display: none !important;
     flex-direction: column;
     height: auto;
     padding: 16px;

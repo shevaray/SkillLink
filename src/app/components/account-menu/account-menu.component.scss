@@ -92,3 +92,44 @@
     padding-left: 16px;
   }
 } 
+
+@media (max-width: 991.98px) {
+  .sidebar-mobile {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 40vw;
+    max-width: 300px;
+    min-width: 220px;
+    height: 100vh;
+    z-index: 3201;
+    box-shadow: 2px 0 16px rgba(47, 71, 123, 0.12);
+    border-radius: 0;
+    padding-top: 32px !important;
+    background: #fff !important;
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.2s cubic-bezier(0.4,0,0.2,1);
+
+  }
+  .sidebar-mobile .account-menu__close {
+    display: block;
+  }
+  .account-menu__dropdown {
+    position: static;
+    box-shadow: none;
+    width: 100%;
+    padding: 0;
+    min-height: 100vh;
+    border-radius: 0;
+    background: transparent;
+  }
+}
+
+@media (max-width: 452px) {
+  .sidebar-mobile {
+    width: 100vw;
+    min-width: 0;
+    max-width: none;
+  }
+} 
