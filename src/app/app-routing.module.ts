@@ -11,6 +11,8 @@ import { ResetPasswordComponent } from './onboarding/reset-password/reset-passwo
 import { ResetSuccessComponent } from './onboarding/reset-success/reset-success.component';
 import { HomeLayoutComponent } from './components/home-layout/home-layout.component';
 import { FirstTimeUserComponent } from './pages/firsttimeuser/firsttimeuser.component';
+import { EditProfileInformationComponent } from './pages/edit-profile/edit-profile-information.component';
+import { RegularDashboardComponent } from './pages/regular-dashboard/regular-dashboard.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,8 @@ const routes: Routes = [
     path: 'home',
     component: HomeLayoutComponent,
     children: [
+      { path: '', component: RegularDashboardComponent },
+      { path: 'edit-profile', component: EditProfileInformationComponent },
       { path: 'firsttimeuser', component: FirstTimeUserComponent }
     ]
   },

@@ -2,6 +2,40 @@
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/mixins';
 
+
+
+
+.dashboard-page{
+  display: flex;
+  flex-direction: column;
+}
+.banner-out {
+  background-color: #6C57DB33;
+  color: #fff;
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ height: 250px;
+ margin-bottom: 60px;
+}
+
+.banner-out__text {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 44px;
+  color: black;
+  text-align: center;
+}
+
+.banner-out__text-highlight {
+  color: #6C57DB;
+  align-self: center;
+}
+
 .dashboard-container {
   padding-left: 100px;
   padding-right: 100px;
