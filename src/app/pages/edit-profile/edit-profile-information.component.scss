@@ -1,0 +1,234 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+.edit-profile-container {
+  width: 100%;
+  padding-top: 30px;
+
+
+  .inner-container{
+    width: 100%;
+
+
+  }
+  .starter{
+   
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+   
+  }
+  .card {
+    border:none;
+    width: 60%;
+    margin-bottom: 2rem;
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    @include media-breakpoint-down(md) {
+      padding: 1.5rem 1rem;
+    }
+    @include media-breakpoint-down(sm) {
+      padding: 1rem 0.5rem;
+    }
+  }
+  .card-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-top: 2rem;
+
+  }
+
+.controller{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+}
+.controller div{
+  width: 50%;
+}
+.items-con{
+  height: auto;
+  width: 250px;
+
+}
+
+.add-picture-btn{
+background-color: #6C57DB ;
+ padding: 0px;
+ min-width: 146px;
+ height: 40px;
+ color: #fff ;
+ border-radius: 20px;
+ border: 1px solid #6C57DB;
+ font-size: 13px;
+ font-weight: 500;
+ font-family: 'Manrope', Arial, Helvetica, sans-serif;
+text-wrap: nowrap;
+padding-left: 10px;
+padding-right: 10px;
+
+ &:hover, &:focus {
+  background: #6C57DB;
+  color: #fff;
+}
+
+}
+
+.profile-con{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
+  @include media-breakpoint-down(sm) {
+}
+}
+
+
+  h3, h4 {
+    font-family: 'Manrope', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+
+  .profile-avatar { 
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      width: 85px;
+      height: 85px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #6C57DB;
+      background: #f5f7fa;
+    }
+    
+  }
+  
+  .form-label {
+    font-family: 'Manrope', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #667085;
+    margin-bottom: 0.25rem;
+  }
+
+  .form-control, .form-select {
+    font-family: 'Manrope', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #131D38;
+    border-radius: 8px;
+    border: 1px solid #D0D5DD;
+    padding: 10px 14px;
+    margin-bottom: 0.5rem;
+    background: #fff;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  }
+
+  textarea.form-control {
+    min-height: 90px;
+    resize: vertical;
+  }
+
+  .form-check-input[type="radio"] {
+    margin-top: 0.2rem;
+    accent-color: #6C57DB;
+  }
+
+  .btn-primary, .btn-outline-primary {
+    font-family: 'Manrope', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 8px;
+    padding: 10px 0;
+    min-width: 140px;
+    transition: background 0.2s, border 0.2s;
+  }
+  .btn-primary {
+    background: #6C57DB;
+    border: 1px solid #6C57DB;
+    color: #fff;
+    &:hover, &:focus {
+      background: #5846b7;
+      border-color: #5846b7;
+      color: #fff;
+    }
+  }
+  .btn-outline-primary {
+    background: #fff;
+    border: 1px solid #6C57DB;
+    color: #6C57DB;
+    &:hover, &:focus {
+      background: #6C57DB;
+      color: #fff;
+    }
+  }
+
+  hr {
+    border-top: 0px solid #F9FAFB;
+    opacity: 1;
+    margin: 1.5rem 0;
+  }
+
+  .text-muted {
+    font-size: 0.95rem;
+    color: #98A2B3 !important;
+  }
+
+  @include media-breakpoint-down(md) {
+    .profile-avatar {
+      margin-bottom: 1rem;
+    }
+    .d-flex.align-items-center.gap-4 {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 1rem !important;
+    }
+    .card-container{
+      flex-direction:column-reverse;
+      width: 100%;
+      
+    }
+    .card{
+      width: 100%;
+    }
+    .profile-avatar{
+      flex-direction: column-reverse;
+      gap: 1rem;
+      align-items: start;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .card {
+      padding: 1rem 0.5rem;
+    }
+    h3, h4 {
+      font-size: 1.25rem;
+    }
+    .btn-primary, .btn-outline-primary {
+      min-width: 100px;
+      font-size: 0.95rem;
+      padding: 8px 0;
+    }
+    .profile-avatar {
+      width: 65px;
+      height: 65px;
+      img {
+        width: 65px;
+        height: 65px;
+      }
+    }
+  }
+} 

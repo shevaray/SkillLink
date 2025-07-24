@@ -1,0 +1,11 @@
+<app-navbar class="d-none d-lg-block"></app-navbar>
+<!-- Hamburger button for mobile -->
+<button class="btn btn-outline-primary d-block d-lg-none sidebar-hamburger" (click)="openSidebar()" type="button" style="position:fixed;top:20px;left:20px;z-index:3100;">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<!-- Sidebar menu for mobile -->
+<app-account-menu *ngIf="sidebarOpen" class="d-block d-lg-none" (close)="closeSidebar()"></app-account-menu>
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+<app-footer></app-footer> 

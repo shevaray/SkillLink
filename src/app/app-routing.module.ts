@@ -9,6 +9,10 @@ import { ForgotPasswordComponent } from './onboarding/forgot-password/forgot-pas
 import { ResetSentComponent } from './onboarding/reset-sent/reset-sent.component';
 import { ResetPasswordComponent } from './onboarding/reset-password/reset-password.component';
 import { ResetSuccessComponent } from './onboarding/reset-success/reset-success.component';
+import { HomeLayoutComponent } from './components/home-layout/home-layout.component';
+import { FirstTimeUserComponent } from './pages/firsttimeuser/firsttimeuser.component';
+import { EditProfileInformationComponent } from './pages/edit-profile/edit-profile-information.component';
+import { RegularDashboardComponent } from './pages/regular-dashboard/regular-dashboard.component';
 
 const routes: Routes = [
   {
@@ -25,6 +29,20 @@ const routes: Routes = [
       { path: 'reset-success', component: ResetSuccessComponent },
       { path: '', redirectTo: 'register', pathMatch: 'full' }
     ]
+  },
+  {
+    path: 'home',
+    component: HomeLayoutComponent,
+    children: [
+      { path: '', component: RegularDashboardComponent },
+      { path: 'edit-profile', component: EditProfileInformationComponent },
+      { path: 'firsttimeuser', component: FirstTimeUserComponent }
+    ]
+  },
+  {
+    path: 'register',
+    redirectTo: 'onboarding/register',
+    pathMatch: 'full'
   },
   { path: '', redirectTo: 'onboarding/register', pathMatch: 'full' }
 ];

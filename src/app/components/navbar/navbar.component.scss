@@ -1,0 +1,221 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+.navbar {
+  background: #fff;
+  box-shadow: 0px 4px 16px 0px rgba(47, 71, 123, 0.07);
+  min-height: 64px;
+  z-index: 100;
+}
+
+.navbar-brand {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #6C57DB;
+  letter-spacing: -0.5px;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #344054;
+  transition: color 0.2s;
+  &.active, &:hover, &:focus {
+    color: #6C57DB;
+  }
+}
+
+.input-group-text {
+  background: #fff;
+  border-right: 0;
+  color: #98A2B3;
+}
+
+.input-group .form-control {
+  border-left: 0;
+  box-shadow: none;
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+}
+
+.input-group {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.badge {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.3em 0.5em;
+  background: #F04438;
+  color: #fff;
+  border-radius: 999px;
+  top: 2px;
+  right: 2px;
+}
+
+.navbar-toggler {
+  border: none;
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.dropdown-menu {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  min-width: 180px;
+}
+
+.dropdown-item {
+  font-weight: 500;
+  color: #344054;
+  &:hover, &:focus {
+    color: #6C57DB;
+    background: #f5f5fa;
+  }
+}
+
+img[alt="Skill Link Logo"] {
+  height: 36px;
+  width: auto;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-nav {
+    gap: 0.5rem !important;
+  }
+  .navbar-brand span {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .navbar {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  .navbar-brand img {
+    height: 28px;
+  }
+} 
+
+.figma-navbar {
+  background: rgba(255,255,255,0.72);
+  box-shadow: 0px 4px 16px 0px rgba(47, 71, 123, 0.07);
+  backdrop-filter: blur(21.4px);
+  height: 100px;
+  padding-left: 32px;
+  padding-right: 32px;
+  z-index: 100;
+}
+
+.figma-navbar__brand {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: #000;
+  letter-spacing: -0.5px;
+}
+
+.figma-navbar__search {
+  width: 420px;
+  height: 44px;
+  background: #fff;
+  border: 1px solid #BABECA;
+  border-radius: 20px;
+  position: relative;
+}
+
+.figma-navbar__search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0 48px 0 24px;
+  width: 100%;
+  height: 100%;
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #131D38;
+  font-weight: 400;
+}
+
+.figma-navbar__search-icon {
+  width: 28px;
+  height: 28px;
+  background: #6C57DB;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.figma-navbar__account-btn {
+  height: 50px;
+  width: 205px;
+  background: #6C57DB;
+  border-radius: 26px;
+  border: none;
+  gap: 8px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.figma-navbar__logout {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+}
+
+@media (max-width: 991.98px) {
+  .figma-navbar {
+    display: none !important;
+    flex-direction: column;
+    height: auto;
+    padding: 16px;
+    gap: 16px;
+  }
+  .figma-navbar__search {
+    width: 100%;
+    margin: 16px 0;
+  }
+  .figma-navbar__account-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .figma-navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 8px;
+    gap: 8px;
+  }
+  .figma-navbar__brand {
+    font-size: 24px;
+  }
+  .figma-navbar__search {
+    width: 100%;
+    margin: 8px 0;
+  }
+  .figma-navbar__account-btn {
+    width: 100%;
+    justify-content: center;
+  }
+} 

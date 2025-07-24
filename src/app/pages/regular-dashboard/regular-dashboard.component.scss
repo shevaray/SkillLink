@@ -1,0 +1,117 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+
+
+
+.dashboard-page{
+  display: flex;
+  flex-direction: column;
+}
+.banner-out {
+  background-color: #6C57DB33;
+  color: #fff;
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ height: 250px;
+ margin-bottom: 60px;
+}
+
+.banner-out__text {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 44px;
+  color: black;
+  text-align: center;
+}
+
+.banner-out__text-highlight {
+  color: #6C57DB;
+  align-self: center;
+}
+
+.dashboard-container {
+  padding-left: 100px;
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+
+.dashboard-hero {
+  max-width: 900px;
+ 
+}
+
+.dashboard-hero__avatar {
+  width: 86px;
+  height: 86px;
+  background: #1D1D1D;
+  border-radius: 50%;
+  background-image: url('/assets/avatar-placeholder.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.dashboard-hero__welcome {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  color: #131313;
+}
+
+.dashboard-hero__edit {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #6C57DB;
+  margin-top: 8px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.dashboard-section {
+  max-width: 1200px;
+}
+
+.dashboard-section__title {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 25px;
+  color: #333;
+}
+
+.dashboard-section__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-hero, .dashboard-section {
+    max-width: 98vw;
+    padding: 0 8px;
+  }
+  .dashboard-section__cards {
+    gap: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .dashboard-hero__avatar {
+    width: 56px;
+    height: 56px;
+  }
+  .dashboard-hero__welcome {
+    font-size: 24px;
+  }
+  .dashboard-section__title {
+    font-size: 20px;
+  }
+} 

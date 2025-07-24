@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, NgClass } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent {
   passwordVisible = false;
   submitted = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router, private userService: UserService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
@@ -29,7 +30,10 @@ export class LoginComponent {
   onSubmit() {
     this.submitted = true;
     if (this.loginForm.valid) {
-      // Handle login logic here
+      // Simulate backend response
+      const isFirstTimeUser = true; // Replace with real backend value
+      this.userService.setFirstTimeUser(isFirstTimeUser);
+      this.router.navigate(['/home']);
     }
   }
 }

@@ -1,0 +1,135 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+.account-menu__dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 350px;
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(47, 71, 123, 0.12);
+  padding: 32px 0 32px 0;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  animation: slideIn 0.2s cubic-bezier(0.4,0,0.2,1);
+ 
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.account-menu__close {
+  position: absolute;
+  top: 31px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.account-menu__title {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.account-menu__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.account-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 60px;
+
+
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #6C57DB;
+  text-decoration: none;
+  padding-left: 40px;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover, &.active {
+    background: #6C57DB;
+    color: #fff;
+    span { color: #fff; }
+    img { filter: brightness(0) invert(1); }
+  }
+
+  span {
+    color: #6C57DB;
+    transition: color 0.2s;
+  }
+}
+
+@media (max-width: 500px) {
+  .account-menu__dropdown {
+    width: 95vw;
+    min-width: 0;
+    padding: 16px 0;
+    right: 0;
+    left: auto;
+  }
+  .account-menu__title, .account-menu__nav {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .account-menu__item {
+    padding-left: 16px;
+  }
+} 
+
+@media (max-width: 991.98px) {
+  .sidebar-mobile {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 40vw;
+    max-width: 300px;
+    min-width: 220px;
+    height: 100vh;
+    z-index: 3201;
+    box-shadow: 2px 0 16px rgba(47, 71, 123, 0.12);
+    border-radius: 0;
+    padding-top: 32px !important;
+    background: #fff !important;
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.2s cubic-bezier(0.4,0,0.2,1);
+
+  }
+  .sidebar-mobile .account-menu__close {
+    display: block;
+  }
+  .account-menu__dropdown {
+    position: static;
+    box-shadow: none;
+    width: 100%;
+    padding: 0;
+    min-height: 100vh;
+    border-radius: 0;
+    background: transparent;
+  }
+}
+
+@media (max-width: 452px) {
+  .sidebar-mobile {
+    width: 100vw;
+    min-width: 0;
+    max-width: none;
+  }
+} 
