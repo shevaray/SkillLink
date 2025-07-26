@@ -1,0 +1,129 @@
+<div class="sessions-container">
+  <div class="sessions-header">
+    <h1 class="sessions-title">Sessions</h1>
+  </div>
+  
+  <div class="status-tabs">
+    <button 
+      class="status-tab" 
+      [class.active]="selectedStatus === 'all'"
+      (click)="onStatusChange('all')"
+    >
+      All Sessions
+    </button>
+    <button 
+      class="status-tab" 
+      [class.active]="selectedStatus === 'upcoming'"
+      (click)="onStatusChange('upcoming')"
+    >
+      Upcoming
+    </button>
+    <button 
+      class="status-tab" 
+      [class.active]="selectedStatus === 'completed'"
+      (click)="onStatusChange('completed')"
+    >
+      Completed
+    </button>
+    <button 
+      class="status-tab" 
+      [class.active]="selectedStatus === 'pending'"
+      (click)="onStatusChange('pending')"
+    >
+      Pending
+    </button>
+  </div>
+  
+  <div class="sessions-list">
+    <div 
+      class="session-card" 
+      *ngFor="let session of filteredSessions"
+    >
+      <div class="session-header">
+        <h3 class="session-title">{{ session.title }}</h3>
+        <div 
+          class="status-badge"
+          [style.background-color]="getStatusColor(session.status)"
+          [style.color]="getStatusTextColor(session.status)"
+        >
+          {{ session.status | titlecase }}
+        </div>
+      </div>
+      
+      <div class="session-content">
+        <div class="partner-info">
+          <div class="partner-avatar">
+            <div class="avatar-circle">
+              <span class="avatar-text">{{ session.partnerInitials }}</span>
+            </div>
+          </div>
+          <span class="partner-name">{{ session.partnerName }}</span>
+        </div>
+        
+        <div class="session-details">
+          <div class="skills-info">
+            <div class="skill-item">
+              <span class="skill-label">Teaching: {{ session.teaching }}</span>
+            </div>
+            <div class="skill-separator"></div>
+            <div class="skill-item">
+              <span class="skill-label">Learning: {{ session.learning }}</span>
+            </div>
+          </div>
+          <div class="session-time">{{ session.time }}</div>
+        </div>
+        
+        <div class="session-actions">
+          <button 
+            class="primary-button"
+            (click)="onPrimaryButtonClick(session)"
+          >
+            {{ session.primaryButtonText }}
+          </button>
+          <button 
+            class="secondary-button"
+            (click)="onSecondaryButtonClick(session)"
+          >
+            {{ session.secondaryButtonText }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Join Session Modal -->
+  <app-join-session 
+    [isVisible]="showJoinSessionModal"
+    (close)="onCloseJoinSessionModal()"
+  ></app-join-session>
+  
+  <!-- Accept Session Modal -->
+  <app-accept-session 
+    [isVisible]="showAcceptSessionModal"
+    [action]="'accept'"
+    [sessionDetails]="selectedSessionForAccept ? {
+      id: selectedSessionForAccept.id,
+      title: selectedSessionForAccept.title,
+      studentName: selectedSessionForAccept.partnerName,
+      teaching: selectedSessionForAccept.teaching,
+      learning: selectedSessionForAccept.learning
+    } : null"
+    (close)="onCloseAcceptSessionModal()"
+    (confirm)="onConfirmAcceptSession($event)"
+  ></app-accept-session>
+  
+  <!-- Decline Session Modal -->
+  <app-accept-session 
+    [isVisible]="showDeclineSessionModal"
+    [action]="'decline'"
+    [sessionDetails]="selectedSessionForDecline ? {
+      id: selectedSessionForDecline.id,
+      title: selectedSessionForDecline.title,
+      studentName: selectedSessionForDecline.partnerName,
+      teaching: selectedSessionForDecline.teaching,
+      learning: selectedSessionForDecline.learning
+    } : null"
+    (close)="onCloseDeclineSessionModal()"
+    (confirm)="onConfirmDeclineSession($event)"
+  ></app-accept-session>
+</div>

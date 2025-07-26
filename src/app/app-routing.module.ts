@@ -13,6 +13,8 @@ import { HomeLayoutComponent } from './components/home-layout/home-layout.compon
 import { FirstTimeUserComponent } from './pages/firsttimeuser/firsttimeuser.component';
 import { EditProfileInformationComponent } from './pages/edit-profile/edit-profile-information.component';
 import { RegularDashboardComponent } from './pages/regular-dashboard/regular-dashboard.component';
+import { NotificationComponent } from './pages/notification/notification.component';
+import { SessionsComponent } from './pages/sessions/sessions.component';
 
 const routes: Routes = [
   {
@@ -36,7 +38,9 @@ const routes: Routes = [
     children: [
       { path: '', component: RegularDashboardComponent },
       { path: 'edit-profile', component: EditProfileInformationComponent },
-      { path: 'firsttimeuser', component: FirstTimeUserComponent }
+      { path: 'firsttimeuser', component: FirstTimeUserComponent },
+      { path: 'notifications', component: NotificationComponent },
+      { path: 'sessions', component: SessionsComponent }
     ]
   },
   {

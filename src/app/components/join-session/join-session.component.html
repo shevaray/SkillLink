@@ -1,0 +1,63 @@
+<div class="modal-overlay" *ngIf="isVisible" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="header-content">
+        <div class="title-section">
+          <h2 class="modal-title">Share Meeting Link</h2>
+          <p class="modal-subtitle">Choose a meeting link platform</p>
+        </div>
+        <button class="close-button" (click)="onClose()">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.5 3.5L3.5 12.5M3.5 3.5L12.5 12.5" stroke="#6C57DB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <div class="platform-selection">
+        <div 
+          class="platform-option" 
+          *ngFor="let platform of platforms"
+          [class.selected]="platform.selected"
+          (click)="selectPlatform(platform.id)"
+        >
+          <div class="platform-icon">
+            <svg *ngIf="platform.icon === 'video'" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 4L10 8L15 12V4Z" fill="#585858"/>
+              <path d="M1 3C1 2.44772 1.44772 2 2 2H10C10.5523 2 11 2.44772 11 3V13C11 13.5523 10.5523 14 10 14H2C1.44772 14 1 13.5523 1 13V3Z" fill="#585858"/>
+            </svg>
+            <svg *ngIf="platform.icon === 'people'" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.67 13.13C18.04 14.06 19 15.32 19 17V20H17V17C17 15.82 16.45 14.7 15.43 13.9L16.67 13.13ZM13.33 13.13C14.6 14.16 15.5 15.47 15.5 17V20H13.5V17C13.5 15.92 13.07 14.88 12.33 14.1L13.33 13.13ZM9 12C11.21 12 13 10.21 13 8C13 5.79 11.21 4 9 4C6.79 4 5 5.79 5 8C5 10.21 6.79 12 9 12ZM9 6C10.1 6 11 6.9 11 8C11 9.1 10.1 10 9 10C7.9 10 7 9.1 7 8C7 6.9 7.9 6 9 6ZM1 17V20H-1V17C-1 15.82 0.45 14.7 1.43 13.9L0.33 13.13C-1.04 14.06 -2 15.32 -2 17V20H0V17C0 15.92 0.43 14.88 1.17 14.1L1 17Z" fill="#585858"/>
+            </svg>
+          </div>
+          <span class="platform-name">{{ platform.name }}</span>
+        </div>
+      </div>
+
+      <div class="meeting-link-section">
+        <label class="link-label">Meeting Link:</label>
+        <div class="link-container">
+          <div class="link-input">
+            <span class="link-text">{{ meetingLink }}</span>
+          </div>
+          <button class="copy-button" (click)="copyMeetingLink()">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 2H2C1.45 2 1 2.45 1 3V13C1 13.55 1.45 14 2 14H10C10.55 14 11 13.55 11 13V11H13C13.55 11 14 10.55 14 10V2C14 1.45 13.55 1 13 1H6C5.45 1 5 1.45 5 2V4H4V2Z" stroke="#5C5858" stroke-width="2"/>
+              <path d="M6 4H13V10H6V4Z" stroke="#5C5858" stroke-width="2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="share-button" (click)="shareLink()">
+        Share Link
+      </button>
+      <button class="cancel-button" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

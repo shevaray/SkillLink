@@ -1,0 +1,39 @@
+<div class="modal-overlay" *ngIf="isVisible" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2 class="modal-title">{{ modalTitle }}</h2>
+      <button class="close-button" (click)="onClose()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.5 3.5L3.5 12.5M3.5 3.5L12.5 12.5" stroke="#6C57DB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="modal-body" *ngIf="sessionDetails">
+      <div class="session-info">
+        <h3 class="session-title">{{ sessionDetails.title }}</h3>
+        
+        <div class="session-details">
+          <div class="detail-item">
+            <span class="detail-label">Student: {{ sessionDetails.studentName }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Teaching: {{ sessionDetails.teaching }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Learning: {{ sessionDetails.learning }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="confirm-button" (click)="onConfirm()">
+        {{ confirmButtonText }}
+      </button>
+      <button class="cancel-button" (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

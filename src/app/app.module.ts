@@ -7,6 +7,10 @@ import { VerifyEmailComponent } from './onboarding/verify-email/verify-email.com
 import { EmailConfirmedComponent } from './onboarding/email-confirmed/email-confirmed.component';
 import { ResetSentComponent } from './onboarding/reset-sent/reset-sent.component';
 import { ResetSuccessComponent } from './onboarding/reset-success/reset-success.component';
+import { NotificationComponent } from './pages/notification/notification.component';
+import { SessionsComponent } from './pages/sessions/sessions.component';
+import { JoinSessionComponent } from './components/join-session/join-session.component';
+import { AcceptSessionComponent } from './components/accept-session/accept-session.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +18,11 @@ import { ResetSuccessComponent } from './onboarding/reset-success/reset-success.
     VerifyEmailComponent,
     EmailConfirmedComponent,
     ResetSentComponent,
-    ResetSuccessComponent
+    ResetSuccessComponent,
+    NotificationComponent,
+    SessionsComponent,
+    JoinSessionComponent,
+    AcceptSessionComponent
   ],
   imports: [
     BrowserModule,
