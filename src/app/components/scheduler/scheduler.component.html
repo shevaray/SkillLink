@@ -1,0 +1,29 @@
+<div class="scheduler-figma">
+  <table class="scheduler-table">
+    <thead>
+      <tr>
+        <th class="time-header">
+          <span>Time</span>
+        </th>
+        <th *ngFor="let day of daysShort; let i = index" class="day-header">
+          <span>{{ day }}</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let time of timeSlots; let tIdx = index">
+        <td class="time-cell">
+          <span>{{ time }}</span>
+        </td>
+        <td *ngFor="let day of daysShort; let dIdx = index" class="checkbox-cell">
+          <label class="checkbox-wrapper">
+            <input type="checkbox"
+                   [checked]="getDisplaySelections()[tIdx][dIdx]"
+                   [disabled]="isDisplayMode"
+                   (change)="onCheckboxChange(tIdx, dIdx)" />
+          </label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

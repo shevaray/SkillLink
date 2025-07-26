@@ -1,0 +1,161 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+.scheduler-figma {
+  width: 100%;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.scheduler-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(108, 87, 219, 0.04);
+  position: relative;
+}
+
+// Increase vertical gap between columns
+.scheduler-table td:not(:first-child),
+.scheduler-table th:not(:first-child) {
+  border-left: 8px solid #F6F5FB;
+}
+
+// Header
+.time-header {
+  background: #6C57DB;
+  color: #fff;
+  font-family: 'Nunito', Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  text-align: left;
+  padding: 16px 18px;
+  border-top-left-radius: 12px;
+  border-bottom: 2px solid #DFE1E6;
+  letter-spacing: 0.5px;
+}
+
+.day-header {
+  background: #6C57DB;
+  color: #fff;
+  font-family: 'Nunito', Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  text-align: left;
+  padding: 16px 18px;
+  border-bottom: 2px solid #DFE1E6;
+  letter-spacing: 0.5px;
+}
+
+// Time column
+.time-cell {
+  background: #fff;
+  color: #333;
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
+  padding: 14px 18px;
+  border-right: 2px solid #DFE1E6;
+  border-bottom: 1px solid #DFE1E6;
+}
+
+// Checkbox cells
+.checkbox-cell {
+  background: #fff;
+  text-align: center;
+  padding: 0;
+  border-bottom: 1px solid #DFE1E6;
+}
+
+// Basic checkbox input
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  accent-color: #000;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: #fff;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  accent-color: #6C57DB;
+}
+
+// Remove custom-checkbox styles
+.custom-checkbox {
+  display: none;
+}
+
+// Remove border for last row
+.scheduler-table tr:last-child .time-cell,
+.scheduler-table tr:last-child .checkbox-cell {
+  border-bottom: none;
+}
+
+// Remove border radius for last header
+.scheduler-table th:last-child {
+  border-top-right-radius: 12px;
+}
+
+// Responsive
+@include media-breakpoint-down(md) {
+  .scheduler-table th,
+  .scheduler-table td {
+    padding: 10px 8px;
+    font-size: 0.95rem;
+  }
+  .time-header, .day-header {
+    padding: 10px 8px;
+    font-size: 11px;
+  }
+  .time-cell {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .scheduler-table th,
+  .scheduler-table td {
+    padding: 6px 4px;
+    font-size: 0.9rem;
+  }
+  .time-header, .day-header {
+    padding: 6px 4px;
+    font-size: 10px;
+  }
+  .time-cell {
+    padding: 6px 4px;
+    font-size: 12px;
+  }
+  input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+  }
+}
