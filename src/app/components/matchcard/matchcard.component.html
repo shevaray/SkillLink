@@ -22,8 +22,23 @@
       <div class="matchcard__learn-skill">{{ wantsToLearn }}</div>
     </div>
     <div class="matchcard__actions d-flex align-items-center gap-2">
-      <button class="matchcard__btn matchcard__btn--primary">Connect</button>
-      <button class="matchcard__btn matchcard__btn--outline">View Profile</button>
+      <button class="matchcard__btn matchcard__btn--primary" (click)="onConnectClick()">Connect</button>
+      <button class="matchcard__btn matchcard__btn--outline" (click)="onViewProfile()">View Profile</button>
     </div>
   </div>
-</div> 
+</div>
+
+<!-- Connect Modal -->
+<app-connect-modal 
+  [isVisible]="showConnectModal"
+  [userDetails]="{
+    id: userId,
+    name: name,
+    avatar: avatar,
+    gender: gender,
+    skillLevel: skillLevel
+  }"
+  (close)="onCloseConnectModal()"
+  (scheduleSession)="onScheduleSession($event)"
+  (message)="onMessage($event)"
+></app-connect-modal> 

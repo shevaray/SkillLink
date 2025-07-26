@@ -11,6 +11,8 @@ import { NotificationComponent } from './pages/notification/notification.compone
 import { SessionsComponent } from './pages/sessions/sessions.component';
 import { JoinSessionComponent } from './components/join-session/join-session.component';
 import { AcceptSessionComponent } from './components/accept-session/accept-session.component';
+import { PublicProfileComponent } from './pages/public-profile/public-profile.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,11 +24,13 @@ import { AcceptSessionComponent } from './components/accept-session/accept-sessi
     NotificationComponent,
     SessionsComponent,
     JoinSessionComponent,
-    AcceptSessionComponent
+    AcceptSessionComponent,
+    PublicProfileComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

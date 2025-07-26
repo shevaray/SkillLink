@@ -15,6 +15,7 @@ import { EditProfileInformationComponent } from './pages/edit-profile/edit-profi
 import { RegularDashboardComponent } from './pages/regular-dashboard/regular-dashboard.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { SessionsComponent } from './pages/sessions/sessions.component';
+import { PublicProfileComponent } from './pages/public-profile/public-profile.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ const routes: Routes = [
       { path: 'edit-profile', component: EditProfileInformationComponent },
       { path: 'firsttimeuser', component: FirstTimeUserComponent },
       { path: 'notifications', component: NotificationComponent },
-      { path: 'sessions', component: SessionsComponent }
+      { path: 'sessions', component: SessionsComponent },
+      { path: 'profile/:id', component: PublicProfileComponent }
     ]
   },
   {
@@ -48,11 +50,15 @@ const routes: Routes = [
     redirectTo: 'onboarding/register',
     pathMatch: 'full'
   },
-  { path: '', redirectTo: 'onboarding/register', pathMatch: 'full' }
+  { path: '', redirectTo: 'onboarding/register', pathMatch: 'full' },
+  // Wildcard route - redirect any unknown routes to login
+  { path: '**', redirectTo: 'onboarding/login', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'top' // Scroll to top on every navigation
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
