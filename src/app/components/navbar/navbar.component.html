@@ -17,7 +17,10 @@
   <div class="d-flex align-items-center" style="gap: 38px;">
     <div class="position-relative">
       <!-- Your Account Button -->
-      <button class="figma-navbar__account-btn d-flex align-items-center" style="height: 50px; width: 215px; background: #6C57DB; border-radius: 26px; border: none; gap: 8px; padding: 0 24px;" (click)="openAccountMenu()">
+      <button class="figma-navbar__account-btn d-flex align-items-center" 
+              data-account-menu-trigger
+              style="height: 50px; width: 215px; background: #6C57DB; border-radius: 26px; border: none; gap: 8px; padding: 0 24px;" 
+              (click)="openAccountMenu()">
         <img src="/assets/ix_user-profile.png" alt="User" width="27" height="27" />
         <span style="font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 600; color: #fff;">Your Account</span>
         <img src="/assets/gridicons_dropdown.png" alt="Dropdown" width="24" height="24" />
@@ -26,6 +29,8 @@
       <app-account-menu *ngIf="showAccountMenu" (close)="closeAccountMenu()"></app-account-menu>
     </div>
     <!-- Log out -->
-    <span class="figma-navbar__logout" style="font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 600; color: #333; cursor: pointer;">Log out</span>
+    <span class="figma-navbar__logout" 
+          routerLink="/onboarding/login"
+          style="font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 600; color: #333; cursor: pointer;">Log out</span>
   </div>
 </nav> 
