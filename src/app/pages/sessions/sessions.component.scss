@@ -5,7 +5,7 @@
 .sessions-container {
   width: 100%;
   max-width: 610px;
-  margin: 0 auto;
+margin-left:100px;
   padding: 38px 0;
   font-family: 'Manrope', Arial, Helvetica, sans-serif;
 
@@ -227,6 +227,8 @@
 @include media-breakpoint-down(md) {
   .sessions-container {
     padding: 20px 16px;
+      margin-left: 0px;
+       margin: 0 auto;
     
     .sessions-header {
       margin-bottom: 24px;
@@ -340,7 +342,12 @@
     }
   }
 }
-
+@media (max-width: 995px) {
+  
+  .sessions-header{
+    margin-top: 60px;
+  }
+}
 // Extra small devices
 @media (max-width: 480px) {
   .sessions-container {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 
 interface SchedulerSlot {
   time: string; // e.g. '9am-11am'
@@ -12,9 +12,10 @@ interface SchedulerSlot {
   templateUrl: './scheduler.component.html',
   styleUrls: ['./scheduler.component.scss']
 })
-export class SchedulerComponent {
+export class SchedulerComponent implements OnInit {
   @Input() isDisplayMode: boolean = false; // false = editable, true = display only
   @Input() predefinedAvailability: boolean[][] = []; // for display mode
+  @Input() initialSelections: boolean[][] | null = null; // for editable mode with pre-filled values
   @Output() slotSelected = new EventEmitter<SchedulerSlot>();
   @Output() allSelectionsChanged = new EventEmitter<SchedulerSlot[]>(); // for multiple selections
 
@@ -42,6 +43,9 @@ export class SchedulerComponent {
 
   constructor() {
     this.initWeekDates();
+  }
+
+  ngOnInit(): void {
     this.initSelections();
   }
 
@@ -58,7 +62,13 @@ export class SchedulerComponent {
 
   // Initialize selections to all false
   initSelections() {
-    this.selections = this.timeSlots.map(() => this.days.map(() => false));
+    if (!this.isDisplayMode && this.initialSelections && this.initialSelections.length === this.timeSlots.length) {
+      // Use initialSelections if provided and valid
+      this.selections = this.initialSelections.map(row => [...row]);
+    } else {
+      // Default to all false
+      this.selections = this.timeSlots.map(() => this.days.map(() => false));
+    }
   }
 
   // Handle checkbox click

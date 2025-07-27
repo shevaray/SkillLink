@@ -16,6 +16,7 @@ import { RegularDashboardComponent } from './pages/regular-dashboard/regular-das
 import { NotificationComponent } from './pages/notification/notification.component';
 import { SessionsComponent } from './pages/sessions/sessions.component';
 import { PublicProfileComponent } from './pages/public-profile/public-profile.component';
+import { ScheduleSessionComponent } from './pages/schedule-session/schedule-session.component';
 
 const routes: Routes = [
   {
@@ -42,7 +43,8 @@ const routes: Routes = [
       { path: 'firsttimeuser', component: FirstTimeUserComponent },
       { path: 'notifications', component: NotificationComponent },
       { path: 'sessions', component: SessionsComponent },
-      { path: 'profile/:id', component: PublicProfileComponent }
+      { path: 'profile/:id', component: PublicProfileComponent },
+      { path: 'schedule-session/:id', component: ScheduleSessionComponent }
     ]
   },
   {

@@ -23,13 +23,8 @@
           (click)="selectPlatform(platform.id)"
         >
           <div class="platform-icon">
-            <svg *ngIf="platform.icon === 'video'" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 4L10 8L15 12V4Z" fill="#585858"/>
-              <path d="M1 3C1 2.44772 1.44772 2 2 2H10C10.5523 2 11 2.44772 11 3V13C11 13.5523 10.5523 14 10 14H2C1.44772 14 1 13.5523 1 13V3Z" fill="#585858"/>
-            </svg>
-            <svg *ngIf="platform.icon === 'people'" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16.67 13.13C18.04 14.06 19 15.32 19 17V20H17V17C17 15.82 16.45 14.7 15.43 13.9L16.67 13.13ZM13.33 13.13C14.6 14.16 15.5 15.47 15.5 17V20H13.5V17C13.5 15.92 13.07 14.88 12.33 14.1L13.33 13.13ZM9 12C11.21 12 13 10.21 13 8C13 5.79 11.21 4 9 4C6.79 4 5 5.79 5 8C5 10.21 6.79 12 9 12ZM9 6C10.1 6 11 6.9 11 8C11 9.1 10.1 10 9 10C7.9 10 7 9.1 7 8C7 6.9 7.9 6 9 6ZM1 17V20H-1V17C-1 15.82 0.45 14.7 1.43 13.9L0.33 13.13C-1.04 14.06 -2 15.32 -2 17V20H0V17C0 15.92 0.43 14.88 1.17 14.1L1 17Z" fill="#585858"/>
-            </svg>
+            <img *ngIf="platform.icon === 'video'" src="/assets/typcn_video.png" alt="" class="menu-icon">
+            <img *ngIf="platform.icon === 'people'" src="/assets/fluent_people.png" alt="" class="menu-icon">
           </div>
           <span class="platform-name">{{ platform.name }}</span>
         </div>

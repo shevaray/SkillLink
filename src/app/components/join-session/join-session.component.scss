@@ -39,18 +39,22 @@
 }
 
 .modal-header {
-  padding: 33px 32px 0 32px;
+ padding-left: 27px;
+ padding-right: 27px;
+ padding-top: 23px;
+  width: 100%;
   
   .header-content {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 110px;
+    width: 100%;
     
     .title-section {
       display: flex;
       flex-direction: column;
-      gap: 17px;
+      gap: 14px;
       
       .modal-title {
         font-family: 'Manrope', Arial, Helvetica, sans-serif;
@@ -129,6 +133,10 @@
         justify-content: center;
         width: 20px;
         height: 20px;
+        .menu-icon{
+          width: 20px;
+          height: 20px;
+        }
       }
       
       .platform-name {
@@ -164,7 +172,7 @@
         border: 1px solid #7A7A7A;
         border-radius: 12px;
         padding: 7px 18px;
-        height: 38px;
+        height: auto;
         display: flex;
         align-items: center;
         
@@ -255,10 +263,12 @@
   }
   
   .modal-header {
-    padding: 24px 24px 0 24px;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-top: 18px;
     
     .header-content {
-      gap: 60px;
+      gap: 10px;
       
       .title-section {
         .modal-title {
@@ -271,7 +281,8 @@
       }
     }
   }
-  
+
+ 
   .modal-body {
     padding: 24px 24px 0 24px;
     gap: 24px;
@@ -317,12 +328,15 @@
   }
   
   .modal-header {
-    padding: 20px 20px 0 20px;
+      padding-left: 18px;
+    padding-right: 18px;
+    padding-top: 18px;
     
     .header-content {
-      flex-direction: column;
-      gap: 16px;
-      align-items: flex-start;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: start;
+   
       
       .title-section {
         .modal-title {
@@ -332,10 +346,6 @@
         .modal-subtitle {
           font-size: 12px;
         }
-      }
-      
-      .close-button {
-        align-self: flex-end;
       }
     }
   }
@@ -357,7 +367,7 @@
     
     .meeting-link-section {
       .link-container {
-        flex-direction: column;
+        flex-direction: gap;
         gap: 8px;
         
         .link-input {

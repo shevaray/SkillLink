@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 export interface UserDetails {
   id: string;
@@ -20,7 +21,7 @@ export class ConnectModalComponent {
   @Output() scheduleSession = new EventEmitter<UserDetails>();
   @Output() message = new EventEmitter<UserDetails>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   onClose(): void {
     this.close.emit();
@@ -28,13 +29,16 @@ export class ConnectModalComponent {
 
   onScheduleSession(): void {
     if (this.userDetails) {
-      this.scheduleSession.emit(this.userDetails);
+      console.log('Navigating to schedule session for user ID:', this.userDetails.id);
+      this.router.navigate(['/home/schedule-session', this.userDetails.id]);
+      this.close.emit();
     }
   }
 
   onMessage(): void {
     if (this.userDetails) {
       this.message.emit(this.userDetails);
+      this.close.emit();
     }
   }
 }

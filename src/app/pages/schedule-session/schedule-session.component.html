@@ -1,0 +1,71 @@
+<div class="schedule-session-container">
+  <div class="schedule-session-card">
+    <!-- Header Section -->
+    <div class="header-section">
+      <div class="back-button" (click)="onBackClick()">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.25 8.75L17.5 15L11.25 21.25" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1 class="page-title">Schedule a Session</h1>
+      </div>
+      
+      <!-- User Info Section -->
+      <div class="user-info-section">
+        <div class="user-avatar">
+          <img [src]="sessionUser.avatar" [alt]="sessionUser.name" class="avatar-image">
+        </div>
+        
+        <div class="user-details">
+          <h2 class="user-name">{{ sessionUser.name }}</h2>
+          
+          <div class="user-badges">
+            <div class="badge-item">
+              <div class="badge-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 8C10.25 8 12 6.25 12 4C12 1.75 10.25 0 8 0C5.75 0 4 1.75 4 4C4 6.25 5.75 8 8 8Z" fill="#6C57DB"/>
+                  <path d="M8 10C5.25 10 3 12.25 3 15H13C13 12.25 10.75 10 8 10Z" fill="#6C57DB"/>
+                </svg>
+              </div>
+              <span class="badge-text">{{ sessionUser.gender }}</span>
+            </div>
+            
+            <div class="badge-item">
+              <div class="badge-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 1L10.5 6L16 6.5L13 10.5L14 16L8 13L2 16L3 10.5L0 6.5L5.5 6L8 1Z" fill="#6C57DB"/>
+                </svg>
+              </div>
+              <span class="badge-text">{{ sessionUser.skillLevel }}</span>
+            </div>
+          </div>
+          
+          <button class="view-profile-button" (click)="onViewProfile()">View Profile</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Availability Section -->
+    <div class="availability-section">
+      <div class="availability-header">
+        <h2 class="availability-title">My Availability</h2>
+        <p class="availability-description">
+          Select your available time slots. You can modify your current availability by checking or unchecking the boxes below.
+        </p>
+      </div>
+      
+      <div class="scheduler-container">
+        <app-scheduler 
+          [isDisplayMode]="false"
+          [initialSelections]="currentSelections"
+          (allSelectionsChanged)="onSchedulerSelectionChanged($event)">
+        </app-scheduler>
+      </div>
+      
+      <div class="schedule-button-container">
+        <button class="schedule-button" (click)="onScheduleSession()">
+          Schedule Session
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

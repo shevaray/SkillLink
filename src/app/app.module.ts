@@ -13,6 +13,7 @@ import { JoinSessionComponent } from './components/join-session/join-session.com
 import { AcceptSessionComponent } from './components/accept-session/accept-session.component';
 import { PublicProfileComponent } from './pages/public-profile/public-profile.component';
 import { SharedModule } from './shared/shared.module';
+import { ScheduleSessionComponent } from './pages/schedule-session/schedule-session.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SharedModule } from './shared/shared.module';
     SessionsComponent,
     JoinSessionComponent,
     AcceptSessionComponent,
-    PublicProfileComponent
+    PublicProfileComponent,
+    ScheduleSessionComponent
   ],
   imports: [
     BrowserModule,
