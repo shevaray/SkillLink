@@ -6,7 +6,9 @@
   width: 100%;
   padding-top: 30px;
 
-
+  @include media-breakpoint-down(md) {
+     padding-top: 55px;
+    }
   .inner-container{
     width: 100%;
 

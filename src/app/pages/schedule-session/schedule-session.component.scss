@@ -5,19 +5,18 @@
 .schedule-session-container {
   width: 100%;
   min-height: 100vh;
-  background-color: #FBFAFF;
+  background: #FFFFFF;
   padding: 44px 0;
   display: flex;
-  justify-content: center;
+
 }
 
 .schedule-session-card {
   width: 780px;
   max-width: 90vw;
-  background: #FFFFFF;
   border-radius: 20px;
   padding: 44px 60px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-left: 100px;
 }
 
 // Header Section
@@ -27,25 +26,27 @@
   gap: 65px;
   margin-bottom: 79px;
 }
+.header-con{
+  display: flex;
+  gap:7px;
+  .page-title {
+    font-family: 'Manrope', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #333333;
+    margin: 0;
+  }
+}
 
 .back-button {
   display: flex;
   align-items: center;
-  gap: 7px;
   cursor: pointer;
   transition: opacity 0.2s ease;
+    transform: scaleX(-1);
   
   &:hover {
     opacity: 0.7;
-  }
-  
-  .page-title {
-    font-family: 'Manrope', Arial, Helvetica, sans-serif;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 0.73;
-    color: #333333;
-    margin: 0;
   }
 }
 
@@ -63,7 +64,7 @@
       height: 152px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #6C57DB;
+      background-color: green;
     }
   }
   
@@ -98,11 +99,15 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          .badges{
+              width: 16px;
+              height: 16px;
+          }
         }
         
         .badge-text {
           font-family: 'Nunito', Arial, Helvetica, sans-serif;
-          font-weight: 600;
+          font-weight: 400;
           font-size: 16px;
           line-height: 1.38;
           color: #484848;
@@ -147,7 +152,7 @@
     .availability-title {
       font-family: 'Manrope', Arial, Helvetica, sans-serif;
       font-weight: 600;
-      font-size: 30px;
+      font-size: 27px;
       line-height: 1.38;
       color: #333333;
       margin: 0;
@@ -156,7 +161,7 @@
     .availability-description {
       font-family: 'Manrope', Arial, Helvetica, sans-serif;
       font-weight: 400;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1.38;
       color: #484848;
       margin: 0;
@@ -200,17 +205,21 @@
 @include media-breakpoint-down(lg) {
   .schedule-session-card {
     padding: 32px 40px;
+    margin-left: 0px;
+     margin-top: 40px;
   }
 }
 
 @include media-breakpoint-down(md) {
   .schedule-session-container {
     padding: 24px 0;
+
   }
   
   .schedule-session-card {
     padding: 24px 24px;
-    width: 95vw;
+    max-width: 100vw;
+    margin-left: 0px;
   }
   
   .header-section {
@@ -220,31 +229,6 @@
   
   .back-button .page-title {
     font-size: 24px;
-  }
-  
-  .user-info-section {
-    flex-direction: column;
-    text-align: center;
-    gap: 24px;
-    
-    .user-avatar .avatar-image {
-      width: 120px;
-      height: 120px;
-    }
-    
-    .user-details {
-      align-items: center;
-      
-      .user-name {
-        font-size: 20px;
-        margin-bottom: 16px;
-      }
-      
-      .user-badges {
-        justify-content: center;
-        margin-bottom: 16px;
-      }
-    }
   }
   
   .availability-section {
@@ -281,7 +265,8 @@
   
   .schedule-session-card {
     padding: 20px 16px;
-    border-radius: 16px;
+    margin-left: 0px;
+
   }
   
   .header-section {
