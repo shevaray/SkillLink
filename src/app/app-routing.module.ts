@@ -19,6 +19,14 @@ import { PublicProfileComponent } from './pages/public-profile/public-profile.co
 import { ScheduleSessionComponent } from './pages/schedule-session/schedule-session.component';
 
 const routes: Routes = [
+  // Standalone login route with onboarding layout
+  {
+    path: 'login',
+    component: OnboardingShell,
+    children: [
+      { path: '', component: LoginComponent }
+    ]
+  },
   {
     path: 'onboarding',
     component: OnboardingShell,
@@ -26,7 +34,6 @@ const routes: Routes = [
       { path: 'register', component: Register },
       { path: 'verify-email', component: VerifyEmailComponent },
       { path: 'email-confirmed', component: EmailConfirmedComponent },
-      { path: 'login', component: LoginComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
       { path: 'reset-sent', component: ResetSentComponent },
       { path: 'reset-password', component: ResetPasswordComponent },
@@ -52,9 +59,9 @@ const routes: Routes = [
     redirectTo: 'onboarding/register',
     pathMatch: 'full'
   },
-  { path: '', redirectTo: 'onboarding/register', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   // Wildcard route - redirect any unknown routes to login
-  { path: '**', redirectTo: 'onboarding/login', pathMatch: 'full' }
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { AccountMenuComponent } from '../account-menu/account-menu.component';
 
 @Component({
@@ -7,7 +8,7 @@ import { AccountMenuComponent } from '../account-menu/account-menu.component';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   standalone: true,
-  imports: [CommonModule, AccountMenuComponent]
+  imports: [CommonModule, RouterModule, AccountMenuComponent]
 })
 export class NavbarComponent {
   @Input() userName: string = 'John Doe';
