@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface UserProfile {
   id: string;
@@ -50,7 +50,10 @@ export class PublicProfileComponent implements OnInit {
     ]
   };
 
-  constructor(private route: ActivatedRoute) { }
+  // Connect modal state
+  showConnectModal: boolean = false;
+
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -92,5 +95,29 @@ export class PublicProfileComponent implements OnInit {
       };
     }
     // Default profile (Sarah Anderson) is already set
+  }
+
+  // Connect modal methods
+  onConnectClick(): void {
+    console.log('Opening connect modal for:', this.userProfile.name);
+    this.showConnectModal = true;
+  }
+
+  onCloseConnectModal(): void {
+    console.log('Closing connect modal');
+    this.showConnectModal = false;
+  }
+
+  onScheduleSession(userDetails?: any): void {
+    console.log('Navigating to schedule session for:', this.userProfile.name);
+    this.router.navigate(['/home/schedule-session', this.userProfile.id]);
+    this.showConnectModal = false;
+  }
+
+  onMessage(userDetails?: any): void {
+    console.log('Opening message for:', this.userProfile.name);
+    // In a real application, this would open a messaging interface
+    alert('Message feature coming soon!');
+    this.showConnectModal = false;
   }
 }

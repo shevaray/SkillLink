@@ -25,7 +25,7 @@
           </div>
         </div>
         
-        <button class="connect-button">Connect</button>
+        <button class="connect-button" (click)="onConnectClick()">Connect</button>
       </div>
     </div>
 
@@ -88,3 +88,18 @@
     </div>
   </div>
 </div>
+
+<!-- Connect Modal -->
+<app-connect-modal
+  [isVisible]="showConnectModal"
+  [userDetails]="{
+    id: userProfile.id,
+    name: userProfile.name,
+    avatar: userProfile.avatar,
+    gender: userProfile.gender,
+    skillLevel: userProfile.skillLevel
+  }"
+  (close)="onCloseConnectModal()"
+  (scheduleSession)="onScheduleSession()"
+  (message)="onMessage()">
+</app-connect-modal>
