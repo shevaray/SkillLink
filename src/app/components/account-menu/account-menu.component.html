@@ -1,3 +1,7 @@
+<!-- Overlay -->
+<div class="account-menu__overlay" (click)="onOverlayClick()"></div>
+
+<!-- Account Menu Content -->
 <div class="account-menu__dropdown animate-in sidebar-mobile">
   <!-- Close Button -->
   <button class="account-menu__close" (click)="close.emit()">
@@ -7,23 +11,23 @@
   <div class="account-menu__title">Your Account</div>
   <!-- Nav Menu -->
   <nav class="account-menu__nav">
-    <a class="account-menu__item" routerLink="/home" routerLinkActive="active">
+    <a class="account-menu__item" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <img src="/assets/home-2.png" alt="Dashboard" width="24" height="24" />
       <span>Dashboard</span>
     </a>
-    <a class="account-menu__item" href="#">
+    <a class="account-menu__item" routerLink="/home/edit-profile" routerLinkActive="active">
       <img src="/assets/profile-circle.png" alt="Profile Information" width="27" height="27" />
       <span>Profile Information</span>
     </a>
-    <a class="account-menu__item" href="#">
+    <a class="account-menu__item" routerLink="/home/messages" routerLinkActive="active">
       <img src="/assets/lets-icons_message-fill.png" alt="Message" width="27" height="27" />
       <span>Message</span>
     </a>
-    <a class="account-menu__item" href="#">
+    <a class="account-menu__item" routerLink="/home/notifications" routerLinkActive="active">
       <img src="/assets/mingcute_notification-fill.png" alt="Notifications" width="27" height="27" />
       <span>Notifications</span>
     </a>
-    <a class="account-menu__item" href="#">
+    <a class="account-menu__item" routerLink="/home/sessions" routerLinkActive="active">
       <img src="/assets/tdesign_time-filled.png" alt="Sessions" width="27" height="27" />
       <span>Sessions</span>
     </a>

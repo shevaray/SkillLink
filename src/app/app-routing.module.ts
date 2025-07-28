@@ -13,8 +13,21 @@ import { HomeLayoutComponent } from './components/home-layout/home-layout.compon
 import { FirstTimeUserComponent } from './pages/firsttimeuser/firsttimeuser.component';
 import { EditProfileInformationComponent } from './pages/edit-profile/edit-profile-information.component';
 import { RegularDashboardComponent } from './pages/regular-dashboard/regular-dashboard.component';
+import { NotificationComponent } from './pages/notification/notification.component';
+import { SessionsComponent } from './pages/sessions/sessions.component';
+import { PublicProfileComponent } from './pages/public-profile/public-profile.component';
+import { ScheduleSessionComponent } from './pages/schedule-session/schedule-session.component';
+import { MessagesComponent } from './pages/messages/messages/messages.component';
 
 const routes: Routes = [
+  // Standalone login route with onboarding layout
+  {
+    path: 'login',
+    component: OnboardingShell,
+    children: [
+      { path: '', component: LoginComponent }
+    ]
+  },
   {
     path: 'onboarding',
     component: OnboardingShell,
@@ -22,7 +35,6 @@ const routes: Routes = [
       { path: 'register', component: Register },
       { path: 'verify-email', component: VerifyEmailComponent },
       { path: 'email-confirmed', component: EmailConfirmedComponent },
-      { path: 'login', component: LoginComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
       { path: 'reset-sent', component: ResetSentComponent },
       { path: 'reset-password', component: ResetPasswordComponent },
@@ -36,7 +48,12 @@ const routes: Routes = [
     children: [
       { path: '', component: RegularDashboardComponent },
       { path: 'edit-profile', component: EditProfileInformationComponent },
-      { path: 'firsttimeuser', component: FirstTimeUserComponent }
+      { path: 'firsttimeuser', component: FirstTimeUserComponent },
+      { path: 'notifications', component: NotificationComponent },
+      { path: 'sessions', component: SessionsComponent },
+      { path: 'messages', component: MessagesComponent },
+      { path: 'profile/:id', component: PublicProfileComponent },
+      { path: 'schedule-session/:id', component: ScheduleSessionComponent }
     ]
   },
   {
@@ -44,11 +61,15 @@ const routes: Routes = [
     redirectTo: 'onboarding/register',
     pathMatch: 'full'
   },
-  { path: '', redirectTo: 'onboarding/register', pathMatch: 'full' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  // Wildcard route - redirect any unknown routes to login
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'top' // Scroll to top on every navigation
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -2,6 +2,24 @@
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/mixins';
 
+.account-menu__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  z-index: 2000;
+  cursor: pointer;
+  animation: fadeIn 0.2s ease-in-out;
+  display: none; // Hide by default on desktop
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .account-menu__dropdown {
   position: absolute;
   top: 60px;
@@ -10,7 +28,7 @@
   background: #fff;
   box-shadow: 0 8px 32px rgba(47, 71, 123, 0.12);
   padding: 32px 0 32px 0;
-  z-index: 2000;
+  z-index: 2001;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -110,11 +128,12 @@
     display: flex;
     flex-direction: column;
     animation: slideIn 0.2s cubic-bezier(0.4,0,0.2,1);
-
   }
+  
   .sidebar-mobile .account-menu__close {
     display: block;
   }
+  
   .account-menu__dropdown {
     position: static;
     box-shadow: none;
@@ -123,6 +142,12 @@
     min-height: 100vh;
     border-radius: 0;
     background: transparent;
+  }
+  
+  .account-menu__overlay {
+    z-index: 3200;
+    background: rgba(0, 0, 0, 0.5);
+    display: block; // Show on mobile
   }
 }
 

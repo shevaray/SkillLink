@@ -1,0 +1,105 @@
+<div class="public-profile-container">
+  <div class="profile-card">
+    <!-- User Header Section -->
+    <div class="user-header">
+      <div class="user-avatar">
+        <img src="/assets/human-pic.png" [alt]="userProfile.name" class="avatar-image">
+      </div>
+      
+      <div class="user-info">
+        <h1 class="user-name">{{ userProfile.name }}</h1>
+        
+        <div class="user-badges">
+          <div class="badge-item">
+            <div class="badge-icon">
+               <img src="/assets/user-octagon.png" alt="" class="badges">
+            </div>
+            <span class="badge-text">{{ userProfile.gender }}</span>
+          </div>
+          
+          <div class="badge-item">
+            <div class="badge-icon">
+              <img src="/assets/verified-fill.png" alt="" class="badges">
+            </div>
+            <span class="badge-text">{{ userProfile.skillLevel }}</span>
+          </div>
+        </div>
+        
+        <button class="connect-button" (click)="onConnectClick()">Connect</button>
+      </div>
+    </div>
+
+    <!-- User Details Section -->
+    <div class="user-details">
+      <!-- About Me -->
+      <div class="detail-section">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-content">{{ userProfile.aboutMe }}</p>
+      </div>
+
+      <!-- Teaching Style -->
+      <div class="detail-section">
+        <h2 class="section-title">Teaching Style</h2>
+        <p class="section-content">{{ userProfile.teachingStyle }}</p>
+      </div>
+
+      <!-- Skills I Offer -->
+      <div class="detail-section">
+        <h2 class="section-title">Skills I Offer</h2>
+        <div class="skills-list">
+          <span class="skill-item" *ngFor="let skill of userProfile.skillsOffered">{{ skill }}</span>
+        </div>
+      </div>
+
+      <!-- Skills I Want to Learn -->
+      <div class="detail-section">
+        <h2 class="section-title">Skills I Want to Learn</h2>
+        <div class="skills-list">
+          <span class="skill-item" *ngFor="let skill of userProfile.skillsLearning">{{ skill }}</span>
+        </div>
+      </div>
+
+      <!-- Stats and Activity -->
+      <div class="detail-section">
+        <h2 class="section-title">Stats and Activity</h2>
+        <div class="stats-list">
+          <span class="stat-item">{{ userProfile.stats.skillsOffered }} Skills Offered</span>
+          <span class="stat-item">{{ userProfile.stats.skillsLearning }} Skills Learning</span>
+          <span class="stat-item">{{ userProfile.stats.sessionsCompleted }} Sessions Completed</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Availability Section -->
+    <div class="availability-section">
+      <div class="availability-header">
+        <h2 class="availability-title">My Availability</h2>
+        <p class="availability-description">
+          Select your available time slots. Even short sessions of 30 minutes to 1 hour are welcome.
+        </p>
+      </div>
+      
+      <div class="scheduler-container">
+        <app-scheduler 
+          [isDisplayMode]="true"
+          [predefinedAvailability]="userProfile.availability">
+        </app-scheduler>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Connect Modal -->
+<app-connect-modal
+  [isVisible]="showConnectModal"
+  [userDetails]="{
+    id: userProfile.id,
+    name: userProfile.name,
+    avatar: userProfile.avatar,
+    gender: userProfile.gender,
+    skillLevel: userProfile.skillLevel
+  }"
+  (close)="onCloseConnectModal()"
+  (scheduleSession)="onScheduleSession()"
+  (message)="onMessage()">
+</app-connect-modal>

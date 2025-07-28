@@ -1,0 +1,108 @@
+<div class="messages-container">
+  <!-- Main Content Area -->
+  <div class="messages-content">
+    <!-- Left Sidebar - Message List -->
+    <div class="messages-sidebar">
+      <!-- Header Section -->
+      <div class="sidebar-header">
+        <div class="header-left">
+          <div class="message-icon">
+            <img src="/assets/message-light.png" alt="Message"  />
+          </div>
+          <h2 class="page-title">Message</h2>
+        </div>
+        <div class="header-right">
+          <div class="compose-button" (click)="onComposeClick()">
+            <img src="/assets/icons_plus.png" alt="Compose" />
+            <span>Compose</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <div class="search-input">
+          <input type="text" placeholder="Search messages.." (input)="onSearchMessages($event)" />
+          <div class="search-icon">
+            <img src="/assets/mynaui_search.png" alt="Search" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Message List -->
+      <div class="message-list">
+        <div class="message-item" 
+             *ngFor="let message of messages" 
+             [class.active]="message.isActive"
+             (click)="selectMessage(message)">
+          <div class="message-avatar">
+            <img [src]="message.senderAvatar" [alt]="message.senderName" />
+          </div>
+          <div class="message-content">
+            <div class="message-header">
+              <span class="sender-name">{{ message.senderName }}</span>
+              <div class="status-indicator" [class.active]="message.isOnline"></div>
+              <span class="message-date">{{ message.date }}</span>
+            </div>
+            <p class="message-preview">{{ message.preview }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side - Chat Area -->
+    <div class="chat-area">
+      <!-- Chat Header -->
+      <div class="chat-header">
+        <div class="chat-user-info">
+          <div class="user-avatar">
+            <img src="/assets/human-pic.png" alt="Emily Smith" />
+          </div>
+          <span class="user-name">Emily Smith</span>
+        </div>
+        <div class="chat-actions">
+          <button class="action-btn block-btn" (click)="onBlockUser()">
+            <img src="/assets/ic_baseline-block.png" alt="Block" />
+          </button>
+          <button class="action-btn delete-btn" (click)="onDeleteChat()">
+            <img src="/assets/delete-outline.png" alt="Delete" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Chat Messages -->
+      <div class="chat-messages">
+        <div class="message-date-header">
+          <span>November 6, 2024</span>
+        </div>
+        
+        <div class="message-bubble" 
+             *ngFor="let chatMessage of chatMessages"
+             [class.received]="chatMessage.isReceived"
+             [class.sent]="!chatMessage.isReceived">
+          <div class="message-content">
+            <p *ngFor="let paragraph of chatMessage.content.split('\n')" 
+               [style.margin-bottom]="paragraph ? '7px' : '0'">
+              {{ paragraph }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message Input -->
+      <div class="message-input-container">
+        <div class="input-wrapper">
+          <textarea 
+            placeholder="Write a message...." 
+            class="message-input"
+            [(ngModel)]="newMessageText"
+            (keydown.enter)="$event.preventDefault(); sendMessage()">
+          </textarea>
+        </div>
+        <button class="send-button" (click)="sendMessage()">
+          <span>Send</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

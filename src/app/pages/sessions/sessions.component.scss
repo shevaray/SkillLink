@@ -1,0 +1,376 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+.sessions-container {
+  width: 100%;
+  max-width: 610px;
+margin-left:100px;
+  padding: 38px 0;
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+
+  .sessions-header {
+    margin-bottom: 38px;
+    
+    .sessions-title {
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 0.73;
+      color: #333333;
+      margin: 0;
+      font-family: 'Manrope', Arial, Helvetica, sans-serif;
+    }
+  }
+
+  .status-tabs {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 25px;
+    
+    .status-tab {
+      background: none;
+      border: none;
+      font-family: 'Manrope', Arial, Helvetica, sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.86;
+      color: #5D5858;
+      cursor: pointer;
+      padding: 10px 20px;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        color: #6C57DB;
+      }
+      
+      &.active {
+        background-color: #6C57DB;
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  .sessions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .session-card {
+    background: #FFFFFF;
+    border: 1px solid #E1E1E1;
+    border-radius: 14px;
+    padding: 39px 30px;
+    transition: box-shadow 0.2s ease;
+    
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .session-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      
+      .session-title {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 0.95;
+        color: #131313;
+        margin: 0;
+        font-family: 'Manrope', Arial, Helvetica, sans-serif;
+      }
+      
+      .status-badge {
+        padding: 8px 20px;
+        border-radius: 87px;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 1.35;
+        letter-spacing: 0.67%;
+        font-family: 'Manrope', Arial, Helvetica, sans-serif;
+      }
+    }
+
+    .session-content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .partner-info {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      
+      .partner-avatar {
+        .avatar-circle {
+          width: 31px;
+          height: 31px;
+          background-color: #1D1D1D;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          .avatar-text {
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 11px;
+            line-height: 1.04;
+            font-family: 'Manrope', Arial, Helvetica, sans-serif;
+          }
+        }
+      }
+      
+      .partner-name {
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 1.3;
+        color: #131313;
+        font-family: 'Manrope', Arial, Helvetica, sans-serif;
+      }
+    }
+
+    .session-details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      
+      .skills-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        
+        .skill-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          
+          .skill-label {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 2.31;
+            color: #5D5A5A;
+            font-family: 'Manrope', Arial, Helvetica, sans-serif;
+          }
+        }
+        
+        .skill-separator {
+          width: 6px;
+          height: 6px;
+          background-color: #6C57DB;
+          border-radius: 50%;
+        }
+      }
+      
+      .session-time {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 1.84;
+        color: #4C4949;
+        font-family: 'Manrope', Arial, Helvetica, sans-serif;
+      }
+    }
+
+    .session-actions {
+      display: flex;
+      gap: 11px;
+      padding-top: 22px;
+      border-top: 1px solid #D7D7D7;
+      
+      .primary-button {
+        background-color: #6C57DB;
+        color: #FFFFFF;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 87px;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 1.35;
+        letter-spacing: 0.67%;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        font-family: 'Manrope', Arial, Helvetica, sans-serif;
+        
+        &:hover {
+          background-color: #5846b7;
+        }
+      }
+      
+      .secondary-button {
+        background: none;
+        color: #6C57DB;
+        border: 1px solid #6C57DB;
+        padding: 8px 20px;
+        border-radius: 87px;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 1.35;
+        letter-spacing: 0.67%;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: 'Manrope', Arial, Helvetica, sans-serif;
+        
+        &:hover {
+          background-color: #6C57DB;
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@include media-breakpoint-down(md) {
+  .sessions-container {
+    padding: 20px 16px;
+      margin-left: 0px;
+       margin: 0 auto;
+    
+    .sessions-header {
+      margin-bottom: 24px;
+      
+      .sessions-title {
+        font-size: 24px;
+      }
+    }
+    
+    .status-tabs {
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      
+      .status-tab {
+        font-size: 13px;
+        padding: 8px 16px;
+      }
+    }
+    
+    .session-card {
+      padding: 24px 20px;
+      
+      .session-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        
+        .session-title {
+          font-size: 18px;
+        }
+      }
+      
+      .session-actions {
+        flex-direction: column;
+        gap: 8px;
+        
+        .primary-button,
+        .secondary-button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .sessions-container {
+    padding: 16px 12px;
+    
+    .sessions-header {
+      margin-bottom: 20px;
+      
+      .sessions-title {
+        font-size: 20px;
+      }
+    }
+    
+    .status-tabs {
+      gap: 12px;
+      margin-bottom: 16px;
+      
+      .status-tab {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+    
+    .session-card {
+      padding: 20px 16px;
+      
+      .session-header {
+        .session-title {
+          font-size: 16px;
+        }
+        
+        .status-badge {
+          font-size: 11px;
+          padding: 6px 12px;
+        }
+      }
+      
+      .partner-info {
+        .partner-avatar {
+          .avatar-circle {
+            width: 28px;
+            height: 28px;
+            
+            .avatar-text {
+              font-size: 10px;
+            }
+          }
+        }
+        
+        .partner-name {
+          font-size: 14px;
+        }
+      }
+      
+      .session-details {
+        .skills-info {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+          
+          .skill-separator {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 995px) {
+  
+  .sessions-header{
+    margin-top: 60px;
+  }
+}
+// Extra small devices
+@media (max-width: 480px) {
+  .sessions-container {
+    .session-card {
+      .session-header {
+        .session-title {
+          font-size: 15px;
+        }
+      }
+      
+      .session-details {
+        .skills-info {
+          .skill-item {
+            .skill-label {
+              font-size: 11px;
+            }
+          }
+        }
+        
+        .session-time {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+}

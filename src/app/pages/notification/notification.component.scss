@@ -1,0 +1,253 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+.notification-container {
+  width: 100%;
+  max-width: 750px;
+  margin-left:100px;
+  padding: 38px 0;
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+
+  .notification-header {
+    margin-bottom: 38px;
+    
+    .notification-title {
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 1.33;
+      color: #333333;
+      margin: 0;
+      font-family: 'Manrope', Arial, Helvetica, sans-serif;
+    }
+  }
+
+  .notification-list {
+    background: #FFFFFF;
+    border: 1px solid #D7D7D7;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .notification-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    padding: 19px 22px;
+    border-bottom: 1px solid #F5F5F5;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: #EFEBFF;
+    }
+
+    &.new {
+      // Remove the purple background for new notifications
+    }
+
+    .notification-avatar {
+      flex-shrink: 0;
+      
+      .avatar-circle {
+        width: 48px;
+        height: 48px;
+        background-color: #1D1D1D;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        .avatar-text {
+          color: #FFFFFF;
+          font-weight: 700;
+          font-size: 17px;
+          line-height: 1.04;
+          font-family: 'Manrope', Arial, Helvetica, sans-serif;
+        }
+      }
+    }
+
+    .notification-content {
+      flex: 1;
+      min-width: 0;
+      
+      .notification-text {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        
+        .notification-message {
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 1.3;
+          color: #131313;
+          margin: 0;
+          font-family: 'Manrope', Arial, Helvetica, sans-serif;
+        }
+        
+        .notification-time {
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 1.48;
+          color: #5D5858;
+          font-family: 'Manrope', Arial, Helvetica, sans-serif;
+        }
+      }
+    }
+
+    .notification-actions {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      
+      .more-options-btn {
+        background: none;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+        
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        &:focus {
+          outline: none;
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@include media-breakpoint-down(md) {
+
+  .notification-container {
+    padding: 20px 16px;
+     margin-left: 0px;
+       margin: 0 auto;
+    
+    .notification-header {
+      margin-bottom: 24px;
+      
+      .notification-title {
+        font-size: 24px;
+      }
+    }
+    
+    .notification-item {
+      padding: 16px;
+      gap: 12px;
+      
+      .notification-avatar {
+        .avatar-circle {
+          width: 40px;
+          height: 40px;
+          
+          .avatar-text {
+            font-size: 14px;
+          }
+        }
+      }
+      
+      .notification-content {
+        .notification-text {
+          .notification-message {
+            font-size: 14px;
+          }
+          
+          .notification-time {
+            font-size: 11px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .notification-container {
+    padding: 16px 12px;
+      margin: 0 auto;
+    
+    .notification-header {
+      margin-bottom: 20px;
+      
+      .notification-title {
+        font-size: 20px;
+      }
+    }
+    
+    .notification-item {
+      padding: 12px;
+      gap: 10px;
+      flex-direction: column;
+      align-items: flex-start;
+      
+      .notification-avatar {
+        align-self: flex-start;
+        
+        .avatar-circle {
+          width: 36px;
+          height: 36px;
+          
+          .avatar-text {
+            font-size: 12px;
+          }
+        }
+      }
+      
+      .notification-content {
+        width: 100%;
+        
+        .notification-text {
+          .notification-message {
+            font-size: 13px;
+          }
+          
+          .notification-time {
+            font-size: 10px;
+          }
+        }
+      }
+      
+      .notification-actions {
+        align-self: flex-end;
+        margin-top: -40px;
+      }
+    }
+  }
+}
+
+@media (max-width: 995px) {
+  .notification-container {
+      margin: 0 auto;
+    
+  }
+  .notification-header{
+    margin-top: 60px;
+  }
+}
+
+// Extra small devices
+@media (max-width: 480px) {
+  .notification-container {
+      margin: 0 auto;
+    .notification-item {
+      .notification-content {
+        .notification-text {
+          .notification-message {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
