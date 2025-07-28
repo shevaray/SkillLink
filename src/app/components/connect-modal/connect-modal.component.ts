@@ -38,6 +38,7 @@ export class ConnectModalComponent {
   onMessage(): void {
     if (this.userDetails) {
       this.message.emit(this.userDetails);
+      this.router.navigate(['/home/messages']);
       this.close.emit();
     }
   }
