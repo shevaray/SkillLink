@@ -40,7 +40,7 @@
   .card-container{
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-start;
     margin-top: 2rem;
 
   }
@@ -208,7 +208,7 @@ padding-right: 10px;
     .profile-avatar{
       flex-direction: column-reverse;
       gap: 1rem;
-      align-items: start;
+      align-items: flex-start;
     }
   }
 
