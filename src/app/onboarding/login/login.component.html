@@ -26,7 +26,16 @@
       <div class="mb-3 text-start">
         <a routerLink="/onboarding/forgot-password" class="small">Forgot password?</a>
       </div>
-      <button type="submit" class="btn btn-primary w-100 fw-semibold">Continue</button>
+      
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger mb-3" role="alert">
+        {{ errorMessage }}
+      </div>
+      
+      <button type="submit" class="btn btn-primary w-100 fw-semibold" [disabled]="loading">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        {{ loading ? 'Signing in...' : 'Continue' }}
+      </button>
     </form>
     <div class="d-flex align-items-center my-3">
       <hr class="flex-grow-1 me-2" />

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, NgClass } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
+import { AuthService, RegisterRequest } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +16,14 @@ export class Register {
   passwordVisible = false;
   confirmPasswordVisible = false;
   submitted = false;
+  loading = false;
+  errorMessage = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.registerForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email]],
@@ -42,8 +49,57 @@ export class Register {
 
   onSubmit() {
     this.submitted = true;
+    this.errorMessage = '';
+
     if (this.registerForm.valid) {
-      this.router.navigate(['/onboarding/verify-email']);
+      this.loading = true;
+      
+      const formValue = this.registerForm.value;
+      
+      // Map form fields to API format
+      const registerData: RegisterRequest = {
+        name: formValue.fullName,
+        email: formValue.email,
+        password: formValue.password,
+        password_confirmation: formValue.confirmPassword,
+        terms: formValue.terms
+      };
+
+      this.authService.register(registerData).subscribe({
+        next: (response) => {
+          this.loading = false;
+          console.log('Registration successful:', response);
+          
+          // TODO: When backend returns user status, set first-time user flag
+          // For now, assume new registrations might need email verification
+          // This could be: this.userService.setFirstTimeUser(response.isFirstTimeUser || true);
+          
+          // Navigate to email verification page (or directly to dashboard based on backend response)
+          this.router.navigate(['/onboarding/verify-email']);
+        },
+        error: (error) => {
+          this.loading = false;
+          this.errorMessage = error.message || 'Registration failed. Please try again.';
+          console.error('Registration error:', error);
+        }
+      });
+    } else {
+      // Mark all fields as touched to show validation errors
+      this.markFormGroupTouched(this.registerForm);
     }
+  }
+
+  /**
+   * Mark all form controls as touched to trigger validation display
+   */
+  private markFormGroupTouched(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(key => {
+      const control = formGroup.get(key);
+      control?.markAsTouched();
+
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 }
