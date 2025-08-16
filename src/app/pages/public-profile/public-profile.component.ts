@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatchesService, Match } from '../../services/matches.service';
 
 interface UserProfile {
   id: string;
@@ -25,49 +26,130 @@ interface UserProfile {
   styleUrls: ['./public-profile.component.scss']
 })
 export class PublicProfileComponent implements OnInit {
-  userProfile: UserProfile = {
-    id: '1',
-    name: 'Sarah Anderson',
-    avatar: '/assets/sarah-anderson.jpg',
-    gender: 'Female',
-    skillLevel: 'Beginner',
-    aboutMe: 'I am a versatile educator and creative professional who brings unique blend of technical and artistic expertise to my teachings. With skills spanning photography, UI/UX design, Guitar instruction, and French language, I offer a well rounded experience. Currently expanding my skill set in Javascript, Spanish, data analytics, and photography.',
-    teachingStyle: 'My teaching approach is highly flexible and student centered, offering sessions ranging from 30 minutes to 1 hour to accommodate different learning preference and schedules. My availability spans throughout the week with multiple time slots, demonstrating my commitment to making learning accessible. As someone who is simultaneously teaching and learning, I bring empathy and fresh perspective to learning',
-    skillsOffered: ['Photography', 'UI/UX Design', 'Guitar Lessons', 'French Language'],
-    skillsLearning: ['Javascript', 'Spanish Language', 'Data Analytics', 'Photography'],
-    stats: {
-      skillsOffered: 12,
-      skillsLearning: 8,
-      sessionsCompleted: 34
-    },
-    availability: [
-      [false, true, false, false, false, true, false], // 9am-11am
-      [true, false, true, false, false, false, false], // 11am-1pm
-      [false, false, false, false, false, false, false], // 1pm-3pm
-      [false, false, false, false, false, false, false], // 3pm-5pm
-      [false, false, false, false, false, true, false], // 5pm-7pm
-      [false, false, false, false, true, false, true]  // 7pm-9pm
-    ]
-  };
-
+  userProfile: UserProfile | null = null;
+  loading = false;
+  error = '';
+  
   // Connect modal state
   showConnectModal: boolean = false;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router,
+    private matchesService: MatchesService
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const userId = params['id'];
-      // In a real application, you would fetch user data based on the ID
-      // For now, we'll use the default data
       console.log('Loading profile for user ID:', userId);
       this.loadUserProfile(userId);
     });
   }
 
   private loadUserProfile(userId: string): void {
-    // In a real application, this would be an API call
-    // For now, we'll simulate different user profiles based on ID
+    this.loading = true;
+    this.error = '';
+    
+    const userIdNumber = parseInt(userId, 10);
+    
+    this.matchesService.getUserProfile(userIdNumber).subscribe({
+      next: (match: Match) => {
+        this.loading = false;
+        this.userProfile = this.mapMatchToUserProfile(match);
+      },
+      error: (error) => {
+        this.loading = false;
+        this.error = error.message || 'Failed to load user profile.';
+        console.error('Error loading user profile:', error);
+      }
+    });
+  }
+
+  /**
+   * Map API Match object to UserProfile interface
+   */
+  private mapMatchToUserProfile(match: Match): UserProfile {
+    return {
+      id: match.id.toString(),
+      name: match.name,
+      avatar: match.profile_picture_path || '/assets/default-avatar.png',
+      gender: match.gender || 'To be determined',
+      skillLevel: match.skill_level,
+      aboutMe: match.about_me,
+      teachingStyle: match.teaching_style,
+      skillsOffered: match.teaches || [],
+      skillsLearning: match.wants_to_learn || [],
+      stats: {
+        skillsOffered: (match.teaches || []).length,
+        skillsLearning: (match.wants_to_learn || []).length,
+        sessionsCompleted: 0 // TODO: Get from API when available
+      },
+      availability: this.parseAvailability(match.availability)
+    };
+  }
+
+  /**
+   * Parse availability JSON string to boolean array
+   */
+  private parseAvailability(availabilityString: string): boolean[][] {
+    try {
+      const parsed = JSON.parse(availabilityString);
+      // If it's already in the correct format, return it
+      if (Array.isArray(parsed) && Array.isArray(parsed[0])) {
+        return parsed;
+      }
+      // Otherwise, return default availability
+      return this.getDefaultAvailability();
+    } catch (error) {
+      console.warn('Failed to parse availability:', error);
+      return this.getDefaultAvailability();
+    }
+  }
+
+  /**
+   * Get default availability matrix
+   */
+  private getDefaultAvailability(): boolean[][] {
+    return [
+      [false, false, false, false, false, false, false], // 9am-11am
+      [false, false, false, false, false, false, false], // 11am-1pm
+      [false, false, false, false, false, false, false], // 1pm-3pm
+      [false, false, false, false, false, false, false], // 3pm-5pm
+      [false, false, false, false, false, false, false], // 5pm-7pm
+      [false, false, false, false, false, false, false]  // 7pm-9pm
+    ];
+  }
+
+  /**
+   * Retry loading profile
+   */
+  retryLoad(): void {
+    const userId = this.route.snapshot.params['id'];
+    if (userId) {
+      this.loadUserProfile(userId);
+    }
+  }
+
+  /**
+   * Generate initials from name
+   */
+  generateInitials(name: string): string {
+    return MatchesService.generateInitials(name);
+  }
+
+  /**
+   * Handle image load error by setting fallback image
+   */
+  onImageError(event: Event): void {
+    const target = event.target as HTMLImageElement;
+    if (target) {
+      target.src = '/assets/human-pic.png';
+    }
+  }
+
+  // Legacy method for fallback - can be removed later
+  private loadUserProfileLegacy(userId: string): void {
     if (userId === '2') {
       this.userProfile = {
         id: '2',
@@ -99,8 +181,10 @@ export class PublicProfileComponent implements OnInit {
 
   // Connect modal methods
   onConnectClick(): void {
-    console.log('Opening connect modal for:', this.userProfile.name);
-    this.showConnectModal = true;
+    if (this.userProfile) {
+      console.log('Opening connect modal for:', this.userProfile.name);
+      this.showConnectModal = true;
+    }
   }
 
   onCloseConnectModal(): void {
@@ -109,15 +193,19 @@ export class PublicProfileComponent implements OnInit {
   }
 
   onScheduleSession(userDetails?: any): void {
-    console.log('Navigating to schedule session for:', this.userProfile.name);
-    this.router.navigate(['/home/schedule-session', this.userProfile.id]);
-    this.showConnectModal = false;
+    if (this.userProfile) {
+      console.log('Navigating to schedule session for:', this.userProfile.name);
+      this.router.navigate(['/home/schedule-session', this.userProfile.id]);
+      this.showConnectModal = false;
+    }
   }
 
   onMessage(userDetails?: any): void {
-    console.log('Opening message for:', this.userProfile.name);
-    // In a real application, this would open a messaging interface
-    alert('Message feature coming soon!');
-    this.showConnectModal = false;
+    if (this.userProfile) {
+      console.log('Opening message for:', this.userProfile.name);
+      // In a real application, this would open a messaging interface
+      alert('Message feature coming soon!');
+      this.showConnectModal = false;
+    }
   }
 }

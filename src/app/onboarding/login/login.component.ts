@@ -52,6 +52,14 @@ export class LoginComponent {
           this.loading = false;
           console.log('Login successful:', response);
           
+          // Check if token was actually saved
+          const token = this.authService.getToken();
+          if (!token) {
+            this.errorMessage = 'Login failed: No authentication token received.';
+            console.error('No token found after login');
+            return;
+          }
+          
           // TODO: Backend will eventually return isFirstTimeUser flag
           // For now, set to false to route to normal dashboard
           // When backend is ready, use: const isFirstTimeUser = response.isFirstTimeUser || false;

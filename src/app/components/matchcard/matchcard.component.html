@@ -31,13 +31,7 @@
 <!-- Connect Modal -->
 <app-connect-modal 
   [isVisible]="showConnectModal"
-  [userDetails]="{
-    id: userId,
-    name: name,
-    avatar: avatar,
-    gender: gender,
-    skillLevel: skillLevel
-  }"
+  [userDetails]="getUserDetails()"
   (close)="onCloseConnectModal()"
   (scheduleSession)="onScheduleSession($event)"
   (message)="onMessage($event)"

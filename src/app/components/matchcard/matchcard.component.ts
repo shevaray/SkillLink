@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
+import { Match } from '../../services/matches.service';
 
 @Component({
   selector: 'app-matchcard',
@@ -20,12 +21,19 @@ export class MatchCardComponent {
   @Input() gender: string = 'Male';
   @Input() skillLevel: string = 'Intermediate';
   @Input() userId: string = '1';
+  @Input() matchData: Match | null = null; // Full match data from API
+
+  @Output() connect = new EventEmitter<Match>();
+  @Output() viewProfile = new EventEmitter<Match>();
 
   showConnectModal: boolean = false;
 
   constructor(private router: Router) {}
 
   onConnectClick(): void {
+    if (this.matchData) {
+      this.connect.emit(this.matchData);
+    }
     this.showConnectModal = true;
   }
 
@@ -36,23 +44,59 @@ export class MatchCardComponent {
   onScheduleSession(userDetails: any): void {
     console.log('Schedule session with:', userDetails);
     this.showConnectModal = false;
+    if (this.matchData) {
+      this.connect.emit(this.matchData);
+    }
   }
 
   onMessage(userDetails: any): void {
     console.log('Message user:', userDetails);
     this.showConnectModal = false;
+    if (this.matchData) {
+      this.connect.emit(this.matchData);
+    }
   }
 
   onViewProfile(): void {
-    console.log('Navigating to profile for user ID:', this.userId);
-    console.log('Navigation path:', `/home/profile/${this.userId}`);
-    this.router.navigate(['/home/profile', this.userId]).then(
-      (success) => {
-        console.log('Navigation successful:', success);
-      },
-      (error) => {
-        console.error('Navigation failed:', error);
-      }
-    );
+    if (this.matchData) {
+      this.viewProfile.emit(this.matchData);
+      console.log('Navigating to profile for user ID:', this.matchData.id);
+      this.router.navigate(['/home/profile', this.matchData.id]).then(
+        (success) => {
+          console.log('Navigation successful:', success);
+        },
+        (error) => {
+          console.error('Navigation failed:', error);
+        }
+      );
+    } else {
+      // Fallback for legacy usage
+      console.log('Navigating to profile for user ID:', this.userId);
+      this.router.navigate(['/home/profile', this.userId]);
+    }
+  }
+
+  /**
+   * Get user initials for connect modal
+   */
+  getUserDetails(): any {
+    if (this.matchData) {
+      return {
+        name: this.matchData.name,
+        initials: this.initials,
+        teaches: this.teaches,
+        skillLevel: this.matchData.skill_level,
+        wantsToLearn: this.wantsToLearn
+      };
+    }
+    
+    // Fallback for legacy usage
+    return {
+      name: this.name,
+      initials: this.initials,
+      teaches: this.teaches,
+      skillLevel: this.skillLevel,
+      wantsToLearn: this.wantsToLearn
+    };
   }
 } 

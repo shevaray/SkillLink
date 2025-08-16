@@ -17,8 +17,10 @@ export interface LoginRequest {
 }
 
 export interface AuthResponse {
-  token: string;
-  user: {
+  token?: string;           // For some endpoints
+  access_token?: string;    // For Laravel Sanctum/Passport
+  token_type?: string;      // Bearer token type
+  user?: {
     id: number;
     name: string;
     email: string;
@@ -52,8 +54,9 @@ export class AuthService {
   register(data: RegisterRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, data).pipe(
       tap(response => {
-        if (response.token) {
-          this.saveAuthData(response.token, response.user);
+        const token = this.extractToken(response);
+        if (token) {
+          this.saveAuthData(token, response.user);
         }
       })
     );
@@ -65,8 +68,9 @@ export class AuthService {
   login(data: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, data).pipe(
       tap(response => {
-        if (response.token) {
-          this.saveAuthData(response.token, response.user);
+        const token = this.extractToken(response);
+        if (token) {
+          this.saveAuthData(token, response.user);
         }
       })
     );
@@ -106,12 +110,31 @@ export class AuthService {
   }
 
   /**
+   * Extract token from response (handles both token and access_token formats)
+   */
+  private extractToken(response: AuthResponse): string | null {
+    return response.access_token || response.token || null;
+  }
+
+  /**
    * Save authentication data to localStorage
    */
   private saveAuthData(token: string, user: any): void {
+    console.log('Saving auth data - Token:', token.substring(0, 20) + '...', 'User:', user);
+    
     localStorage.setItem(this.tokenKey, token);
-    localStorage.setItem(this.userKey, JSON.stringify(user));
+    
+    // Save user data if provided, otherwise create minimal user object
+    const userData = user || {
+      id: 0,
+      name: 'User',
+      email: '',
+      email_verified_at: null
+    };
+    localStorage.setItem(this.userKey, JSON.stringify(userData));
+    
     this.authStatusSubject.next(true);
+    console.log('Auth data saved successfully. Token exists:', !!this.getToken());
   }
 
   /**
@@ -137,8 +160,9 @@ export class AuthService {
   refreshToken(): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/refresh`, {}).pipe(
       tap(response => {
-        if (response.token) {
-          this.saveAuthData(response.token, response.user);
+        const token = this.extractToken(response);
+        if (token) {
+          this.saveAuthData(token, response.user);
         }
       })
     );

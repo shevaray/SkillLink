@@ -29,11 +29,11 @@ export class ErrorInterceptor implements HttpInterceptor {
               break;
             case 401:
               errorMessage = 'Unauthorized access';
-              // Clear auth data and redirect to login
-              this.authService.logout().subscribe({
-                next: () => this.router.navigate(['/login']),
-                error: () => this.router.navigate(['/login'])
-              });
+              // Only trigger logout for authenticated endpoints, not login/register
+              if (this.shouldTriggerLogout(req.url)) {
+                // Clear auth data locally (don't call logout API)
+                this.clearAuthAndRedirect();
+              }
               break;
             case 403:
               errorMessage = 'Access forbidden';
@@ -76,5 +76,35 @@ export class ErrorInterceptor implements HttpInterceptor {
         }));
       })
     );
+  }
+
+  /**
+   * Determine if a 401 error should trigger logout
+   * Don't trigger logout for authentication endpoints
+   */
+  private shouldTriggerLogout(url: string): boolean {
+    const authEndpoints = [
+      '/api/login',
+      '/api/register', 
+      '/api/forgot-password',
+      '/api/reset-password',
+      '/api/verify-email'
+    ];
+    
+    return !authEndpoints.some(endpoint => url.includes(endpoint));
+  }
+
+  /**
+   * Clear authentication data locally and redirect to login
+   * Avoid calling logout API which might cause more errors
+   */
+  private clearAuthAndRedirect(): void {
+    // Clear auth data locally without API call
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user_data');
+    localStorage.removeItem('cached_matches');
+    
+    // Redirect to login
+    this.router.navigate(['/login']);
   }
 }

@@ -1,9 +1,28 @@
 <div class="public-profile-container">
-  <div class="profile-card">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary mb-3" role="status">
+      <span class="visually-hidden">Loading profile...</span>
+    </div>
+    <p class="text-muted">Loading user profile...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="alert alert-danger d-flex align-items-center" role="alert">
+    <i class="bi bi-exclamation-triangle me-2"></i>
+    <div class="flex-grow-1">{{ error }}</div>
+    <button class="btn btn-sm btn-outline-primary ms-2" (click)="retryLoad()">
+      <i class="bi bi-arrow-clockwise me-1"></i>Retry
+    </button>
+  </div>
+
+  <!-- Profile Content -->
+  <div *ngIf="!loading && !error && userProfile" class="profile-card">
     <!-- User Header Section -->
     <div class="user-header">
       <div class="user-avatar">
-        <img src="/assets/human-pic.png" [alt]="userProfile.name" class="avatar-image">
+        <img [src]="userProfile.avatar" [alt]="userProfile.name" class="avatar-image" 
+             (error)="onImageError($event)">
       </div>
       
       <div class="user-info">
@@ -91,6 +110,7 @@
 
 <!-- Connect Modal -->
 <app-connect-modal
+  *ngIf="userProfile"
   [isVisible]="showConnectModal"
   [userDetails]="{
     id: userProfile.id,
