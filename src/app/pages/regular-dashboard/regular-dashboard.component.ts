@@ -102,6 +102,11 @@ export class RegularDashboardComponent implements OnInit, OnDestroy {
    * Get teaches value with fallback
    */
   getTeaches(match: Match): string {
+    // Check for new API structure first
+    if (match.skills_to_teach && match.skills_to_teach.length > 0) {
+      return match.skills_to_teach.map(skill => skill.name).join(', ');
+    }
+    // Fallback to old structure
     if (match.teaches && match.teaches.length > 0) {
       return match.teaches.join(', ');
     }
@@ -112,6 +117,11 @@ export class RegularDashboardComponent implements OnInit, OnDestroy {
    * Get wants to learn value with fallback
    */
   getWantsToLearn(match: Match): string {
+    // Check for new API structure first
+    if (match.skills_to_learn && match.skills_to_learn.length > 0) {
+      return match.skills_to_learn.map(skill => skill.name).join(', ');
+    }
+    // Fallback to old structure
     if (match.wants_to_learn && match.wants_to_learn.length > 0) {
       return match.wants_to_learn.join(', ');
     }

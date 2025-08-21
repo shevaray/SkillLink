@@ -70,6 +70,10 @@ export class PublicProfileComponent implements OnInit {
    * Map API Match object to UserProfile interface
    */
   private mapMatchToUserProfile(match: Match): UserProfile {
+    // Extract skills from new API structure or fallback to old structure
+    const skillsOffered = match.skills_to_teach?.map(skill => skill.name) || match.teaches || [];
+    const skillsLearning = match.skills_to_learn?.map(skill => skill.name) || match.wants_to_learn || [];
+    
     return {
       id: match.id.toString(),
       name: match.name,
@@ -78,11 +82,11 @@ export class PublicProfileComponent implements OnInit {
       skillLevel: match.skill_level,
       aboutMe: match.about_me,
       teachingStyle: match.teaching_style,
-      skillsOffered: match.teaches || [],
-      skillsLearning: match.wants_to_learn || [],
+      skillsOffered: skillsOffered,
+      skillsLearning: skillsLearning,
       stats: {
-        skillsOffered: (match.teaches || []).length,
-        skillsLearning: (match.wants_to_learn || []).length,
+        skillsOffered: skillsOffered.length,
+        skillsLearning: skillsLearning.length,
         sessionsCompleted: 0 // TODO: Get from API when available
       },
       availability: this.parseAvailability(match.availability)

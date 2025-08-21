@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, tap } from 'rxjs';
+import { Observable, BehaviorSubject, tap, switchMap, map, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface RegisterRequest {
@@ -20,14 +20,23 @@ export interface AuthResponse {
   token?: string;           // For some endpoints
   access_token?: string;    // For Laravel Sanctum/Passport
   token_type?: string;      // Bearer token type
-  user?: {
-    id: number;
-    name: string;
-    email: string;
-    email_verified_at?: string;
-  };
+  user?: UserProfile;
   message?: string;
   isFirstTimeUser?: boolean; // TODO: Backend will provide this flag
+}
+
+export interface UserProfile {
+  id: number;
+  name: string;
+  email: string;
+  email_verified_at?: string;
+  created_at: string;
+  updated_at: string;
+  about_me?: string;
+  teaching_style?: string;
+  skill_level?: string;
+  profile_picture_path?: string;
+  availability?: string;
 }
 
 export interface ApiError {
@@ -67,11 +76,22 @@ export class AuthService {
    */
   login(data: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, data).pipe(
-      tap(response => {
+      switchMap(response => {
         const token = this.extractToken(response);
         if (token) {
-          this.saveAuthData(token, response.user);
+          // Save token first, then fetch user profile
+          localStorage.setItem(this.tokenKey, token);
+          this.authStatusSubject.next(true);
+          
+          // Fetch complete user profile
+          return this.fetchUserProfile().pipe(
+            tap(userProfile => {
+              this.saveAuthData(token, userProfile);
+            }),
+            map(() => response) // Return original login response
+          );
         }
+        return of(response);
       })
     );
   }
@@ -199,5 +219,19 @@ export class AuthService {
    */
   resendVerification(): Observable<any> {
     return this.http.post(`${this.apiUrl}/email/verification-notification`, {});
+  }
+
+  /**
+   * Fetch user profile
+   */
+  fetchUserProfile(): Observable<UserProfile> {
+    return this.http.get<UserProfile>(`${this.apiUrl}/profile`);
+  }
+
+  /**
+   * Public method to update user profile in localStorage
+   */
+  updateStoredUserProfile(user: UserProfile): void {
+    localStorage.setItem(this.userKey, JSON.stringify(user));
   }
 }

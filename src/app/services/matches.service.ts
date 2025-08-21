@@ -3,10 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
+export interface Skill {
+  id: number;
+  name: string;
+  created_at: string;
+  updated_at: string;
+  pivot: {
+    user_id: number;
+    skill_id: number;
+  };
+}
+
 export interface Match {
   id: number;
   name: string;
   email: string;
+  email_verified_at?: string;
   about_me: string;
   teaching_style: string;
   skill_level: string;
@@ -17,6 +29,8 @@ export interface Match {
   gender?: string;
   teaches?: string[];
   wants_to_learn?: string[];
+  skills_to_teach?: Skill[];
+  skills_to_learn?: Skill[];
 }
 
 export interface MatchesResponse {
