@@ -1,5 +1,17 @@
 <div class="schedule-session-container">
-  <div class="schedule-session-card">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="loading-spinner"></div>
+    <p>Loading user information...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-state">
+    <p class="error-message">{{ error }}</p>
+    <button class="retry-button" (click)="ngOnInit()">Try Again</button>
+  </div>
+
+  <div class="schedule-session-card" *ngIf="sessionUser && !loading && !error">
     <!-- Header Section -->
     <div class="header-section">
       <div class="header-con">
@@ -27,7 +39,7 @@
       <div class="user-info-section">
         <div class="user-avatar">
           <img
-            src="/assets/human-pic.png"
+            [src]="sessionUser.avatar"
             [alt]="sessionUser.name"
             class="avatar-image"
           />
@@ -59,12 +71,44 @@
       </div>
     </div>
 
+    <!-- Skills Selection Section -->
+    <div class="skills-section">
+      <div class="skills-header">
+        <h2 class="skills-title">Select a Skill to Learn</h2>
+        <p class="skills-description">
+          Choose which skill you'd like to learn from {{ sessionUser.name }}.
+        </p>
+      </div>
+
+      <div class="skills-dropdown-container">
+        <select 
+          class="skills-dropdown" 
+          (change)="onSkillChange($event)"
+          [value]="selectedSkillId || ''"
+        >
+          <option value="" disabled>Select a skill...</option>
+          <option 
+            *ngFor="let skill of availableSkills" 
+            [value]="skill.id"
+          >
+            {{ skill.name }}
+          </option>
+        </select>
+        
+        <div class="dropdown-icon">
+          <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L6 6L11 1" stroke="#6C57DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
     <!-- Availability Section -->
     <div class="availability-section">
       <div class="availability-header">
-        <h2 class="availability-title">My Availability</h2>
+        <h2 class="availability-title">Select Your Preferred Time</h2>
         <p class="availability-description">
-        Select your available time slots. Even short sessions of 30 minutes to 1 hour are welcome. 
+        Choose a time slot that works best for you. Sessions typically last 30 minutes to 1 hour.
         </p>
       </div>
 
@@ -78,9 +122,20 @@
       </div>
 
       <div class="schedule-button-container">
-        <button class="schedule-button" (click)="onScheduleSession()">
-          Schedule Session
+        <button 
+          class="schedule-button" 
+          (click)="onScheduleSession()"
+          [disabled]="!selectedSkillId || !selectedDateTime || loading"
+          [class.disabled]="!selectedSkillId || !selectedDateTime || loading"
+        >
+          <span *ngIf="!loading">Schedule Session</span>
+          <span *ngIf="loading">Scheduling...</span>
         </button>
+        
+        <div class="selection-summary" *ngIf="selectedSkillId && selectedDateTime">
+          <p><strong>Selected Skill:</strong> {{ getSelectedSkillName() }}</p>
+          <p><strong>Selected Time:</strong> {{ formatSelectedDateTime() }}</p>
+        </div>
       </div>
     </div>
   </div>

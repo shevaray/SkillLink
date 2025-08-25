@@ -1,1 +1,10 @@
 <router-outlet></router-outlet>
+
+<!-- Global Notification Modal -->
+<app-notification-modal
+  [isVisible]="(notificationService.isVisible$ | async) || false"
+  [data]="notificationService.data$ | async"
+  (close)="notificationService.hide()"
+  (confirm)="notificationService.hide()"
+  (cancel)="notificationService.hide()">
+</app-notification-modal>

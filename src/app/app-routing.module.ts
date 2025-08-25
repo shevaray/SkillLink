@@ -18,6 +18,7 @@ import { SessionsComponent } from './pages/sessions/sessions.component';
 import { PublicProfileComponent } from './pages/public-profile/public-profile.component';
 import { ScheduleSessionComponent } from './pages/schedule-session/schedule-session.component';
 import { MessagesComponent } from './pages/messages/messages/messages.component';
+import { SearchComponent } from './pages/search/search.component';
 
 const routes: Routes = [
   // Standalone login route with onboarding layout
@@ -52,6 +53,7 @@ const routes: Routes = [
       { path: 'notifications', component: NotificationComponent },
       { path: 'sessions', component: SessionsComponent },
       { path: 'messages', component: MessagesComponent },
+      { path: 'search', component: SearchComponent },
       { path: 'profile/:id', component: PublicProfileComponent },
       { path: 'schedule-session/:id', component: ScheduleSessionComponent }
     ]

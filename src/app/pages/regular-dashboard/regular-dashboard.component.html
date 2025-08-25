@@ -9,68 +9,99 @@
     <div class="dashboard-hero d-flex align-items-center gap-4 mb-5">
       <div class="dashboard-hero__avatar"></div>
       <div class="dashboard-hero__info">
-        <div class="dashboard-hero__welcome">Welcome Back, Sarah</div>
+        <div class="dashboard-hero__welcome">Welcome Back, {{ getUserFirstName() }}</div>
         <div class="dashboard-hero__edit" routerLink="/home/edit-profile" style="cursor:pointer; color:#6C57DB; text-decoration:underline;">Edit skills and Interests</div>
       </div>
     </div>
     
     <div class="dashboard-section mb-5">
       <div class="dashboard-section__title mb-4">Perfect matches for you</div>
-      <div class="dashboard-section__cards d-flex flex-wrap gap-4">
+      
+      <!-- Loading State -->
+      <div *ngIf="loading" class="text-center py-4">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading perfect matches...</span>
+        </div>
+        <p class="mt-2 text-muted">Finding your perfect matches...</p>
+      </div>
+      
+      <!-- Error State -->
+      <div *ngIf="error && !loading" class="alert alert-warning d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle me-2"></i>
+        <div class="flex-grow-1">{{ error }}</div>
+        <button class="btn btn-sm btn-outline-primary ms-2" (click)="retryLoad()">
+          <i class="bi bi-arrow-clockwise me-1"></i>Retry
+        </button>
+      </div>
+      
+      <!-- Perfect Matches Cards -->
+      <div *ngIf="!loading && !error && perfectMatches.length > 0" class="dashboard-section__cards d-flex flex-wrap gap-4">
         <app-matchcard
-          initials="MR"
-          name="Marcus Rodriguez"
-          matchLabel="Perfect Match!"
-          teaches="Photography"
-          description="Full stack developer with 5+ years experience. I can help build modern web applications from scratch."
-          wantsToLearn="Guitar"
+          *ngFor="let match of perfectMatches"
+          [initials]="generateInitials(match.name)"
+          [name]="match.name"
+          [matchLabel]="'Perfect Match!'"
+          [teaches]="getTeaches(match)"
+          [description]="match.about_me"
+          [wantsToLearn]="getWantsToLearn(match)"
+          [skillLevel]="match.skill_level"
+          [gender]="getGender(match)"
+          [matchData]="match"
+          (connect)="onConnect(match)"
+          (viewProfile)="onViewProfile(match)"
         ></app-matchcard>
-        <app-matchcard
-          initials="EK"
-          name="Emily Kim"
-          matchLabel="Perfect Match!"
-          teaches="Photography"
-          description="Marine biologist turned tech enthusiast with 3+ years in Full stack development. I love building modern web application..."
-          wantsToLearn="Guitar"
-        ></app-matchcard>
-        <app-matchcard
-        initials="EK"
-        name="Emily Kim"
-        matchLabel="Perfect Match!"
-        teaches="Photography"
-        description="Marine biologist turned tech enthusiast with 3+ years in Full stack development. I love building modern web application..."
-        wantsToLearn="Guitar"
-      ></app-matchcard>
+      </div>
+      
+      <!-- Empty State for Perfect Matches -->
+      <div *ngIf="!loading && !error && perfectMatches.length === 0" class="empty-state text-center py-5">
+        <div class="empty-state__icon mb-3">
+          <i class="bi bi-heart text-muted" style="font-size: 3rem;"></i>
+        </div>
+        <h4 class="empty-state__title text-muted mb-2">No Perfect Matches Yet</h4>
+        <p class="empty-state__description text-muted mb-3">
+          We're still looking for users who perfectly match your skills and interests.<br>
+          Check back soon or update your profile to improve matching.
+        </p>
+        <button class="btn btn-outline-primary" routerLink="/home/edit-profile">
+          <i class="bi bi-pencil me-2"></i>Update Profile
+        </button>
       </div>
     </div>
     
     <div class="dashboard-section mb-5">
       <div class="dashboard-section__title mb-4">Recommended matches</div>
-      <div class="dashboard-section__cards d-flex flex-wrap gap-4">
+      
+      <!-- Recommended Matches Cards -->
+      <div *ngIf="!loading && !error && recommendedMatches.length > 0" class="dashboard-section__cards d-flex flex-wrap gap-4">
         <app-matchcard
-          initials="RR"
-          name="Racheal Rodriguez"
-          matchLabel="Available Now"
-          teaches="Python Programming"
-          description="Passionate software engineer building scalable web applications. I love breaking down complex programming concepts"
-          wantsToLearn="Guitar"
+          *ngFor="let match of recommendedMatches"
+          [initials]="generateInitials(match.name)"
+          [name]="match.name"
+          [matchLabel]="'Available Now'"
+          [teaches]="getTeaches(match)"
+          [description]="match.about_me"
+          [wantsToLearn]="getWantsToLearn(match)"
+          [skillLevel]="match.skill_level"
+          [gender]="getGender(match)"
+          [matchData]="match"
+          (connect)="onConnect(match)"
+          (viewProfile)="onViewProfile(match)"
         ></app-matchcard>
-        <app-matchcard
-          initials="MC"
-          name="Michael Clinton"
-          matchLabel="Available Tomorrow"
-          teaches="Photoshop Basics"
-          description="Creative professional who’s spent 6+ years mastering digital design tools. I specialize in making photoshop approachable for beginners"
-          wantsToLearn="Guitar"
-        ></app-matchcard>
-        <app-matchcard
-          initials="JL"
-          name="Jennifer Lyon"
-          matchLabel="Available this week"
-          teaches="Fitness & Yoga"
-          description="I combine my scientific background with 3+ years of fitness training to help students build sustainable healthy habits"
-          wantsToLearn="Guitar"
-        ></app-matchcard>
+      </div>
+      
+      <!-- Empty State for Recommended Matches -->
+      <div *ngIf="!loading && !error && recommendedMatches.length === 0" class="empty-state text-center py-5">
+        <div class="empty-state__icon mb-3">
+          <i class="bi bi-people text-muted" style="font-size: 3rem;"></i>
+        </div>
+        <h4 class="empty-state__title text-muted mb-2">No Recommendations Yet</h4>
+        <p class="empty-state__description text-muted mb-3">
+          We're working on finding great skill exchange partners for you.<br>
+          Complete your profile to get better recommendations.
+        </p>
+        <button class="btn btn-outline-primary" routerLink="/home/edit-profile">
+          <i class="bi bi-pencil me-2"></i>Complete Profile
+        </button>
       </div>
     </div> 
     

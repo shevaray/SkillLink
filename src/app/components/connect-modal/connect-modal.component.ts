@@ -7,6 +7,9 @@ export interface UserDetails {
   avatar: string;
   gender: string;
   skillLevel: string;
+  initials?: string;
+  teaches?: string;
+  wantsToLearn?: string;
 }
 
 @Component({

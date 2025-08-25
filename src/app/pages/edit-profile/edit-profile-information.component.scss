@@ -152,10 +152,12 @@ padding-right: 10px;
     font-family: 'Manrope', Arial, Helvetica, sans-serif;
     font-weight: 600;
     font-size: 1rem;
-    border-radius: 8px;
+    border-radius: 40px;
     padding: 10px 0;
     min-width: 140px;
     transition: background 0.2s, border 0.2s;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   .btn-primary {
     background: #6C57DB;
