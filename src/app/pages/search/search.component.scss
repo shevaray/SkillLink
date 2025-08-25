@@ -157,210 +157,15 @@
     }
   }
 
-  .matches-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  // Use the existing dashboard cards styling for match cards
+  .dashboard-section__cards {
+    display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
+    justify-content: flex-start;
 
     @include media-breakpoint-down(md) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .match-card {
-    background: #fff;
-    border: 1px solid #E9ECEF;
-    border-radius: 16px;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
-      border-color: #6C57DB;
-    }
-
-    .match-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-
-      .match-avatar {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        overflow: hidden;
-        flex-shrink: 0;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-
-      .match-info {
-        flex: 1;
-
-        .match-name {
-          font-size: 1.25rem;
-          font-weight: 600;
-          color: #131D38;
-          margin-bottom: 0.25rem;
-        }
-
-        .match-level {
-          font-size: 0.875rem;
-          color: #6C57DB;
-          font-weight: 500;
-          margin-bottom: 0.75rem;
-        }
-
-        .match-rating {
-          .rating-text {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #16A34A;
-            margin-bottom: 0.5rem;
-            display: block;
-          }
-
-          .rating-bar {
-            width: 100%;
-            height: 6px;
-            background: #E9ECEF;
-            border-radius: 3px;
-            overflow: hidden;
-
-            .rating-fill {
-              height: 100%;
-              background: linear-gradient(90deg, #16A34A 0%, #22C55E 100%);
-              transition: width 0.3s ease;
-            }
-          }
-        }
-      }
-
-      .match-actions {
-        .btn-outline-sm {
-          background: transparent;
-          color: #6C57DB;
-          border: 1px solid #6C57DB;
-          padding: 0.5rem 1rem;
-          border-radius: 8px;
-          font-size: 0.875rem;
-          font-weight: 500;
-          cursor: pointer;
-          transition: all 0.3s ease;
-
-          &:hover {
-            background: #6C57DB;
-            color: white;
-          }
-        }
-      }
-    }
-
-    .match-body {
-      margin-bottom: 1.5rem;
-
-      .match-bio {
-        color: #6B7280;
-        line-height: 1.5;
-        margin-bottom: 1.5rem;
-      }
-
-      .skills-section {
-        margin-bottom: 1rem;
-
-        .skills-teaches,
-        .skills-learning {
-          margin-bottom: 1rem;
-
-          .skills-title {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 0.5rem;
-          }
-
-          .skills-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-
-            .skill-tag {
-              padding: 0.25rem 0.75rem;
-              border-radius: 12px;
-              font-size: 0.75rem;
-              font-weight: 500;
-
-              &.teach {
-                background: #DBEAFE;
-                color: #1E40AF;
-              }
-
-              &.learn {
-                background: #FEF3C7;
-                color: #92400E;
-              }
-            }
-          }
-        }
-      }
-
-      .availability-info {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.875rem;
-        color: #6B7280;
-        padding: 0.75rem;
-        background: #F8F9FA;
-        border-radius: 8px;
-      }
-    }
-
-    .match-footer {
-      display: flex;
-      gap: 0.75rem;
-
-      button {
-        flex: 1;
-        padding: 0.75rem 1rem;
-        border-radius: 8px;
-        font-size: 0.875rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-      }
-
-      .connect-btn {
-        background: #6C57DB;
-        color: white;
-        border: none;
-
-        &:hover {
-          background: #5a4bc4;
-        }
-      }
-
-      .schedule-btn {
-        background: transparent;
-        color: #16A34A;
-        border: 1px solid #16A34A;
-
-        &:hover {
-          background: #16A34A;
-          color: white;
-        }
-      }
+      justify-content: center;
     }
   }
 }
@@ -441,8 +246,8 @@
     padding: 2rem;
   }
 
-  .match-card .match-footer {
-    flex-direction: column;
+  .dashboard-section__cards {
+    justify-content: center;
   }
 }
 

@@ -113,70 +113,22 @@
       <p class="loading-text">Finding your perfect matches...</p>
     </div>
 
-    <!-- Match Cards -->
-    <div *ngIf="!loading" class="matches-grid">
-      <div *ngFor="let match of mockResults" class="match-card">
-        <div class="match-header">
-          <div class="match-avatar">
-            <img [src]="match.avatar" [alt]="match.name" (error)="onImageError($event)" />
-          </div>
-          <div class="match-info">
-            <h3 class="match-name">{{ match.name }}</h3>
-            <p class="match-level">{{ match.skillLevel }}</p>
-            <div class="match-rating">
-              <span class="rating-text">{{ match.matchPercentage }}% Match</span>
-              <div class="rating-bar">
-                <div class="rating-fill" [style.width.%]="match.matchPercentage"></div>
-              </div>
-            </div>
-          </div>
-          <div class="match-actions">
-            <button class="btn-outline-sm" (click)="viewProfile(match.id)">
-              View Profile
-            </button>
-          </div>
-        </div>
-
-        <div class="match-body">
-          <p class="match-bio">{{ match.bio }}</p>
-          
-          <div class="skills-section">
-            <div class="skills-teaches">
-              <h4 class="skills-title">Can Teach:</h4>
-              <div class="skills-tags">
-                <span *ngFor="let skill of match.skillsToTeach" class="skill-tag teach">
-                  {{ skill }}
-                </span>
-              </div>
-            </div>
-
-            <div class="skills-learning">
-              <h4 class="skills-title">Wants to Learn:</h4>
-              <div class="skills-tags">
-                <span *ngFor="let skill of match.skillsToLearn" class="skill-tag learn">
-                  {{ skill }}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="availability-info">
-            <img src="/assets/tdesign_time-filled.png" alt="Time" width="16" height="16" />
-            <span>Available {{ match.availability }}</span>
-          </div>
-        </div>
-
-        <div class="match-footer">
-          <button class="connect-btn" (click)="connectWithUser(match.id)">
-            <img src="/assets/fluent_people.png" alt="Connect" width="18" height="18" />
-            Connect
-          </button>
-          <button class="schedule-btn" (click)="scheduleSession(match.id)">
-            <img src="/assets/tdesign_time-filled.png" alt="Schedule" width="18" height="18" />
-            Schedule Session
-          </button>
-        </div>
-      </div>
+    <!-- Match Cards using the existing MatchCard component -->
+    <div *ngIf="!loading" class="dashboard-section__cards d-flex flex-wrap gap-4">
+      <app-matchcard
+        *ngFor="let match of mockResults"
+        [initials]="generateInitials(match.name)"
+        [name]="match.name"
+        [matchLabel]="'Perfect Match!'"
+        [teaches]="getTeaches(match)"
+        [description]="match.about_me"
+        [wantsToLearn]="getWantsToLearn(match)"
+        [skillLevel]="match.skill_level"
+        [gender]="getGender(match)"
+        [matchData]="match"
+        (connect)="onConnect(match)"
+        (viewProfile)="onViewProfile(match)"
+      ></app-matchcard>
     </div>
 
     <!-- No Results -->
