@@ -82,20 +82,26 @@ export class MatchCardComponent {
   getUserDetails(): any {
     if (this.matchData) {
       return {
+        id: this.matchData.id.toString(),
         name: this.matchData.name,
+        avatar: this.matchData.profile_picture_path || '/assets/human-pic.png',
+        gender: this.matchData.gender || 'Not specified',
+        skillLevel: this.matchData.skill_level,
         initials: this.initials,
         teaches: this.teaches,
-        skillLevel: this.matchData.skill_level,
         wantsToLearn: this.wantsToLearn
       };
     }
     
     // Fallback for legacy usage
     return {
+      id: this.userId,
       name: this.name,
+      avatar: this.avatar,
+      gender: this.gender,
+      skillLevel: this.skillLevel,
       initials: this.initials,
       teaches: this.teaches,
-      skillLevel: this.skillLevel,
       wantsToLearn: this.wantsToLearn
     };
   }

@@ -1,0 +1,194 @@
+<div class="search-container">
+  <!-- Search Form -->
+  <div *ngIf="!showResults" class="search-form-container">
+    <div class="search-header">
+      <h1 class="search-title">Find Your Perfect Match</h1>
+      <p class="search-subtitle">Tell us what you're looking for and we'll find the best learning partners for you</p>
+    </div>
+
+    <form [formGroup]="searchForm" (ngSubmit)="findPerfectMatch()" class="search-form">
+      <div class="form-grid">
+        <!-- Skills I Want to Learn -->
+        <div class="form-group">
+          <label for="skillsToLearn" class="form-label">Skills I Want to Learn *</label>
+          <input
+            id="skillsToLearn"
+            type="text"
+            class="form-control"
+            formControlName="skillsToLearn"
+            placeholder="e.g., JavaScript, Python, React, Angular..."
+            [class.is-invalid]="searchForm.get('skillsToLearn')?.invalid && searchForm.get('skillsToLearn')?.touched"
+          />
+          <div *ngIf="searchForm.get('skillsToLearn')?.invalid && searchForm.get('skillsToLearn')?.touched" class="invalid-feedback">
+            Please enter the skills you want to learn
+          </div>
+        </div>
+
+        <!-- Skills I Can Teach -->
+        <div class="form-group">
+          <label for="skillsICanTeach" class="form-label">Skills I Can Teach</label>
+          <input
+            id="skillsICanTeach"
+            type="text"
+            class="form-control"
+            formControlName="skillsICanTeach"
+            placeholder="e.g., HTML, CSS, Design, Marketing..."
+          />
+          <small class="text-muted">Optional - helps find mutual learning opportunities</small>
+        </div>
+
+        <!-- Skill Level -->
+        <div class="form-group">
+          <label for="skillLevel" class="form-label">My Skill Level *</label>
+          <select 
+            id="skillLevel" 
+            class="form-select"
+            formControlName="skillLevel"
+            [class.is-invalid]="searchForm.get('skillLevel')?.invalid && searchForm.get('skillLevel')?.touched"
+          >
+            <option value="">Select your skill level</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+            <option value="Expert">Expert</option>
+          </select>
+          <div *ngIf="searchForm.get('skillLevel')?.invalid && searchForm.get('skillLevel')?.touched" class="invalid-feedback">
+            Please select your skill level
+          </div>
+        </div>
+
+        <!-- Availability -->
+        <div class="form-group">
+          <label for="availability" class="form-label">Preferred Availability *</label>
+          <select 
+            id="availability" 
+            class="form-select"
+            formControlName="availability"
+            [class.is-invalid]="searchForm.get('availability')?.invalid && searchForm.get('availability')?.touched"
+          >
+            <option value="">Select your availability</option>
+            <option value="Weekday Mornings">Weekday Mornings (9am-12pm)</option>
+            <option value="Weekday Afternoons">Weekday Afternoons (1pm-5pm)</option>
+            <option value="Weekday Evenings">Weekday Evenings (6pm-9pm)</option>
+            <option value="Weekend Mornings">Weekend Mornings (9am-12pm)</option>
+            <option value="Weekend Afternoons">Weekend Afternoons (1pm-5pm)</option>
+            <option value="Weekend Evenings">Weekend Evenings (6pm-9pm)</option>
+            <option value="Flexible">Flexible - Any time</option>
+          </select>
+          <div *ngIf="searchForm.get('availability')?.invalid && searchForm.get('availability')?.touched" class="invalid-feedback">
+            Please select your preferred availability
+          </div>
+        </div>
+      </div>
+
+      <div class="search-button-container">
+        <button 
+          type="submit" 
+          class="find-match-btn"
+          [disabled]="searchForm.invalid || loading"
+        >
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+          {{ loading ? 'Finding Matches...' : 'Find Perfect Match' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Search Results -->
+  <div *ngIf="showResults" class="search-results-container">
+    <div class="results-header">
+      <button class="back-btn" (click)="goBackToSearch()">
+        <img src="/assets/solar_arrow-up-linear.png" alt="Back" width="20" height="20" style="transform: rotate(-90deg);" />
+        Back to Search
+      </button>
+      <h2 class="results-title">Perfect Matches Found</h2>
+      <p class="results-subtitle">{{ mockResults.length }} people match your criteria</p>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-container">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Finding your perfect matches...</span>
+      </div>
+      <p class="loading-text">Finding your perfect matches...</p>
+    </div>
+
+    <!-- Match Cards -->
+    <div *ngIf="!loading" class="matches-grid">
+      <div *ngFor="let match of mockResults" class="match-card">
+        <div class="match-header">
+          <div class="match-avatar">
+            <img [src]="match.avatar" [alt]="match.name" (error)="onImageError($event)" />
+          </div>
+          <div class="match-info">
+            <h3 class="match-name">{{ match.name }}</h3>
+            <p class="match-level">{{ match.skillLevel }}</p>
+            <div class="match-rating">
+              <span class="rating-text">{{ match.matchPercentage }}% Match</span>
+              <div class="rating-bar">
+                <div class="rating-fill" [style.width.%]="match.matchPercentage"></div>
+              </div>
+            </div>
+          </div>
+          <div class="match-actions">
+            <button class="btn-outline-sm" (click)="viewProfile(match.id)">
+              View Profile
+            </button>
+          </div>
+        </div>
+
+        <div class="match-body">
+          <p class="match-bio">{{ match.bio }}</p>
+          
+          <div class="skills-section">
+            <div class="skills-teaches">
+              <h4 class="skills-title">Can Teach:</h4>
+              <div class="skills-tags">
+                <span *ngFor="let skill of match.skillsToTeach" class="skill-tag teach">
+                  {{ skill }}
+                </span>
+              </div>
+            </div>
+
+            <div class="skills-learning">
+              <h4 class="skills-title">Wants to Learn:</h4>
+              <div class="skills-tags">
+                <span *ngFor="let skill of match.skillsToLearn" class="skill-tag learn">
+                  {{ skill }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="availability-info">
+            <img src="/assets/tdesign_time-filled.png" alt="Time" width="16" height="16" />
+            <span>Available {{ match.availability }}</span>
+          </div>
+        </div>
+
+        <div class="match-footer">
+          <button class="connect-btn" (click)="connectWithUser(match.id)">
+            <img src="/assets/fluent_people.png" alt="Connect" width="18" height="18" />
+            Connect
+          </button>
+          <button class="schedule-btn" (click)="scheduleSession(match.id)">
+            <img src="/assets/tdesign_time-filled.png" alt="Schedule" width="18" height="18" />
+            Schedule Session
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Results -->
+    <div *ngIf="!loading && mockResults.length === 0" class="no-results">
+      <div class="no-results-icon">
+        <img src="/assets/mynaui_search.png" alt="No results" width="60" height="60" />
+      </div>
+      <h3 class="no-results-title">No matches found</h3>
+      <p class="no-results-description">Try adjusting your search criteria or expanding your availability.</p>
+      <button class="btn-primary" (click)="goBackToSearch()">
+        Try Different Search
+      </button>
+    </div>
+  </div>
+</div>

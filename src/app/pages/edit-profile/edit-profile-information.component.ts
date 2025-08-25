@@ -5,6 +5,7 @@ import { Subject, takeUntil, forkJoin } from 'rxjs';
 import { SharedModule } from '../../shared/shared.module';
 import { ProfileService, Skill, ProfileUpdateRequest, SkillsUpdateRequest, PasswordUpdateRequest, ProfilePictureResponse } from '../../services/profile.service';
 import { AuthService, UserProfile } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-edit-profile-information',
@@ -54,7 +55,8 @@ export class EditProfileInformationComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private profileService: ProfileService,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationService
   ) {
     this.initializeForms();
   }
@@ -99,17 +101,19 @@ export class EditProfileInformationComponent implements OnInit, OnDestroy {
   private loadInitialData(): void {
     this.loading = true;
     
-    // Load profile and skills in parallel
+    // Load profile, all skills, and user's current skills in parallel
     forkJoin({
       profile: this.profileService.getProfile(),
-      skills: this.profileService.getAllSkills()
+      skills: this.profileService.getAllSkills(),
+      profileWithSkills: this.profileService.getProfileWithSkills()
     }).pipe(
       takeUntil(this.destroy$)
     ).subscribe({
-      next: ({ profile, skills }) => {
+      next: ({ profile, skills, profileWithSkills }) => {
         this.userProfile = profile;
         this.allSkills = skills;
         this.populateFormsWithData(profile);
+        this.loadUserSkillsFromProfile(profileWithSkills);
         this.loading = false;
         this.loadingProfile = false;
         this.loadingSkills = false;
@@ -143,11 +147,6 @@ export class EditProfileInformationComponent implements OnInit, OnDestroy {
 
     // Parse availability data
     this.userAvailability = this.parseAvailability(profile.availability || '{}');
-    
-    // Note: Skills will be handled separately when we get them from API
-    // For now, we'll initialize empty arrays
-    this.selectedSkillsToTeach = [];
-    this.selectedSkillsToLearn = [];
   }
 
   onUpdatePersonalInfo(): void {
@@ -170,7 +169,7 @@ export class EditProfileInformationComponent implements OnInit, OnDestroy {
         this.userProfile = updatedProfile;
         // Update localStorage
         this.authService.updateStoredUserProfile(updatedProfile);
-        alert('Personal information updated successfully!');
+        this.notificationService.showSuccess('Personal information updated successfully!');
       },
       error: (error) => {
         this.profileError = error.message || 'Failed to update personal information.';
@@ -208,7 +207,7 @@ export class EditProfileInformationComponent implements OnInit, OnDestroy {
         this.userProfile = result.profile;
         // Update localStorage
         this.authService.updateStoredUserProfile(result.profile);
-        alert('Profile updated successfully!');
+        this.notificationService.showSuccess('Profile updated successfully!');
       },
       error: (error) => {
         this.updatingProfile = false;
@@ -237,7 +236,7 @@ export class EditProfileInformationComponent implements OnInit, OnDestroy {
       next: () => {
         this.updatingPassword = false;
         this.passwordForm.reset();
-        alert('Password updated successfully!');
+        this.notificationService.showSuccess('Password updated successfully!');
       },
       error: (error) => {
         this.updatingPassword = false;
@@ -271,9 +270,26 @@ export class EditProfileInformationComponent implements OnInit, OnDestroy {
       : this.selectedSkillsToLearn.includes(skillId);
   }
 
+  /**
+   * Get skill name by ID
+   */
+  getSkillNameById(skillId: number): string {
+    const skill = this.allSkills.find(s => s.id === skillId);
+    return skill ? skill.name : 'Unknown Skill';
+  }
+
   retryLoadData(): void {
     this.error = '';
     this.loadInitialData();
+  }
+
+  /**
+   * Load user's current skills from the profile with skills
+   */
+  private loadUserSkillsFromProfile(profileWithSkills: any): void {
+    // Extract skill IDs from the user's current skills
+    this.selectedSkillsToTeach = profileWithSkills.skills_to_teach?.map((skill: Skill) => skill.id) || [];
+    this.selectedSkillsToLearn = profileWithSkills.skills_to_learn?.map((skill: Skill) => skill.id) || [];
   }
 
   /**
@@ -356,13 +372,13 @@ export class EditProfileInformationComponent implements OnInit, OnDestroy {
       
       // Validate file type
       if (!file.type.startsWith('image/')) {
-        alert('Please select a valid image file.');
+        this.notificationService.showError('Please select a valid image file.');
         return;
       }
       
       // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        alert('File size must be less than 5MB.');
+        this.notificationService.showError('File size must be less than 5MB.');
         return;
       }
       
@@ -382,7 +398,7 @@ export class EditProfileInformationComponent implements OnInit, OnDestroy {
    */
   onUploadProfilePicture(): void {
     if (!this.selectedFile) {
-      alert('Please select a file first.');
+      this.notificationService.showError('Please select a file first.');
       return;
     }
 
@@ -402,12 +418,12 @@ export class EditProfileInformationComponent implements OnInit, OnDestroy {
           this.authService.updateStoredUserProfile(this.userProfile);
         }
         
-        alert('Profile picture uploaded successfully!');
+        this.notificationService.showSuccess('Profile picture uploaded successfully!');
       },
       error: (error) => {
         this.uploadingPicture = false;
         console.error('Error uploading profile picture:', error);
-        alert('Failed to upload profile picture. Please try again.');
+        this.notificationService.showError('Failed to upload profile picture. Please try again.');
       }
     });
   }

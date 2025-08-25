@@ -15,6 +15,7 @@ import { AcceptSessionComponent } from './components/accept-session/accept-sessi
 import { PublicProfileComponent } from './pages/public-profile/public-profile.component';
 import { SharedModule } from './shared/shared.module';
 import { ScheduleSessionComponent } from './pages/schedule-session/schedule-session.component';
+import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 
 // Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
@@ -32,7 +33,8 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     JoinSessionComponent,
     AcceptSessionComponent,
     PublicProfileComponent,
-    ScheduleSessionComponent
+    ScheduleSessionComponent,
+    NotificationModalComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,17 @@
   </div>
   
   <div class="notification-list">
+    <!-- Loading state -->
+    <div *ngIf="loading" class="notification-loading">
+      <p>Loading notifications...</p>
+    </div>
+
+    <!-- Empty state -->
+    <div *ngIf="!loading && notifications.length === 0" class="notification-empty">
+      <p>No notifications yet</p>
+    </div>
+
+    <!-- Notification items -->
     <div
       class="notification-item"
       *ngFor="let notification of notifications"

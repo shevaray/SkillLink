@@ -29,6 +29,20 @@
     overflow: hidden;
   }
 
+  .notification-loading,
+  .notification-empty {
+    padding: 40px 20px;
+    text-align: center;
+    
+    p {
+      color: #5D5858;
+      font-size: 16px;
+      font-weight: 400;
+      margin: 0;
+      font-family: 'Manrope', Arial, Helvetica, sans-serif;
+    }
+  }
+
   .notification-item {
     display: flex;
     align-items: flex-start;

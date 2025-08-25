@@ -7,10 +7,21 @@
 
   <!-- Search Bar -->
   <div class="figma-navbar__search d-flex align-items-center position-relative" style="width: 420px; height: 44px; background: #fff; border: 1px solid #BABECA; border-radius: 20px;">
-    <input type="text" class="figma-navbar__search-input" placeholder="Search skills" style="border: none; outline: none; background: transparent; padding: 0 48px 0 24px; width: 100%; height: 100%; font-family: 'Manrope', sans-serif; font-size: 14px; color: #131D38; font-weight: 400;" />
-    <span class="figma-navbar__search-icon position-absolute end-0 top-50 translate-middle-y me-3" style="width: 28px; height: 28px; background: #6C57DB; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+    <input 
+      type="text" 
+      class="figma-navbar__search-input" 
+      placeholder="Search for perfect matches..." 
+      [(ngModel)]="searchQuery"
+      (keyup.enter)="performSearch()"
+      style="border: none; outline: none; background: transparent; padding: 0 48px 0 24px; width: 100%; height: 100%; font-family: 'Manrope', sans-serif; font-size: 14px; color: #131D38; font-weight: 400;" 
+    />
+    <button 
+      class="figma-navbar__search-icon position-absolute end-0 top-50 translate-middle-y me-3" 
+      style="width: 28px; height: 28px; background: #6C57DB; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer;"
+      (click)="performSearch()"
+    >
       <img src="/assets/mynaui_search.png" alt="Search" width="18" height="18" />
-    </span>
+    </button>
   </div>
 
   <!-- Account & Log out -->

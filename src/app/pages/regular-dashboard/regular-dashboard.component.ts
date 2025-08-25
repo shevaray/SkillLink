@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { MatchCardComponent } from '../../components/matchcard/matchcard.component';
 import { MatchesService, Match } from '../../services/matches.service';
+import { AuthService, UserProfile } from '../../services/auth.service';
 
 @Component({
   selector: 'app-regular-dashboard',
@@ -17,12 +18,17 @@ export class RegularDashboardComponent implements OnInit, OnDestroy {
   recommendedMatches: Match[] = [];
   loading = false;
   error = '';
+  userProfile: UserProfile | null = null;
   
   private destroy$ = new Subject<void>();
 
-  constructor(private matchesService: MatchesService) {}
+  constructor(
+    private matchesService: MatchesService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.loadUserProfile();
     this.loadMatches();
     this.subscribeToMatches();
   }
@@ -133,5 +139,40 @@ export class RegularDashboardComponent implements OnInit, OnDestroy {
    */
   getGender(match: Match): string {
     return match.gender || 'To be determined';
+  }
+
+  /**
+   * Load user profile
+   */
+  private loadUserProfile(): void {
+    // First try to get from localStorage
+    const storedUser = this.authService.getCurrentUser();
+    if (storedUser) {
+      this.userProfile = storedUser;
+    }
+    
+    // Also fetch fresh data from API
+    this.authService.fetchUserProfile()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (profile) => {
+          this.userProfile = profile;
+          this.authService.updateStoredUserProfile(profile);
+        },
+        error: (error) => {
+          console.error('Error loading user profile:', error);
+          // Keep the stored user if API fails
+        }
+      });
+  }
+
+  /**
+   * Get user first name for welcome message
+   */
+  getUserFirstName(): string {
+    if (this.userProfile?.name) {
+      return this.userProfile.name.split(' ')[0];
+    }
+    return 'User';
   }
 } 

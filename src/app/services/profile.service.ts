@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { UserProfile } from './auth.service';
 
@@ -75,6 +76,19 @@ export class ProfileService {
    */
   getAllSkills(): Observable<Skill[]> {
     return this.http.get<Skill[]>(`${this.apiUrl}/skills`);
+  }
+
+  /**
+   * Get current user's profile with skills using the users endpoint
+   */
+  getProfileWithSkills(): Observable<any> {
+    // First get the current user's basic profile to get their ID
+    return this.getProfile().pipe(
+      switchMap(profile => {
+        // Then use the matches service endpoint to get full profile with skills
+        return this.http.get<any>(`${this.apiUrl}/users/${profile.id}`);
+      })
+    );
   }
 
   /**

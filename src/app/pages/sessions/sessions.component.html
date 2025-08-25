@@ -34,7 +34,30 @@
     </button>
   </div>
   
-  <div class="sessions-list">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="loading-spinner"></div>
+    <p>Loading your sessions...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-state">
+    <p class="error-message">{{ error }}</p>
+    <button class="retry-button" (click)="retryLoad()">Try Again</button>
+  </div>
+
+
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && !error && filteredSessions.length === 0" class="empty-state">
+    <div class="empty-icon">📅</div>
+    <h3>No Sessions Found</h3>
+    <p>You don't have any sessions yet. Start by connecting with other users!</p>
+    <button class="primary-button" routerLink="/home">Find Matches</button>
+  </div>
+
+  <!-- Sessions List -->
+  <div class="sessions-list" *ngIf="!loading && !error && filteredSessions.length > 0">
     <div 
       class="session-card" 
       *ngFor="let session of filteredSessions"
@@ -81,6 +104,7 @@
             {{ session.primaryButtonText }}
           </button>
           <button 
+            *ngIf="session.secondaryButtonText"
             class="secondary-button"
             (click)="onSecondaryButtonClick(session)"
           >
@@ -102,7 +126,7 @@
     [isVisible]="showAcceptSessionModal"
     [action]="'accept'"
     [sessionDetails]="selectedSessionForAccept ? {
-      id: selectedSessionForAccept.id,
+      id: selectedSessionForAccept.id.toString(),
       title: selectedSessionForAccept.title,
       studentName: selectedSessionForAccept.partnerName,
       teaching: selectedSessionForAccept.teaching,
@@ -117,7 +141,7 @@
     [isVisible]="showDeclineSessionModal"
     [action]="'decline'"
     [sessionDetails]="selectedSessionForDecline ? {
-      id: selectedSessionForDecline.id,
+      id: selectedSessionForDecline.id.toString(),
       title: selectedSessionForDecline.title,
       studentName: selectedSessionForDecline.partnerName,
       teaching: selectedSessionForDecline.teaching,

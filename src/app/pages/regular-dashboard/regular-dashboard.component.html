@@ -9,7 +9,7 @@
     <div class="dashboard-hero d-flex align-items-center gap-4 mb-5">
       <div class="dashboard-hero__avatar"></div>
       <div class="dashboard-hero__info">
-        <div class="dashboard-hero__welcome">Welcome Back, Sarah</div>
+        <div class="dashboard-hero__welcome">Welcome Back, {{ getUserFirstName() }}</div>
         <div class="dashboard-hero__edit" routerLink="/home/edit-profile" style="cursor:pointer; color:#6C57DB; text-decoration:underline;">Edit skills and Interests</div>
       </div>
     </div>

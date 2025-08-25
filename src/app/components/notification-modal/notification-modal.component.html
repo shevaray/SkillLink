@@ -1,0 +1,42 @@
+<div class="modal-overlay" *ngIf="isVisible" (click)="onClose()">
+  <div class="modal-content" [class]="getModalClass()" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="icon-container">
+        <div [class]="getIconClass()">
+          <span *ngIf="data?.type === 'success'">✓</span>
+          <span *ngIf="data?.type === 'error'">✕</span>
+          <span *ngIf="data?.type === 'warning'">⚠</span>
+          <span *ngIf="data?.type === 'info' || !data?.type">ℹ</span>
+        </div>
+      </div>
+      
+      <button class="close-button" (click)="onClose()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.5 3.5L3.5 12.5M3.5 3.5L12.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <h3 class="modal-title" *ngIf="data?.title">{{ data?.title }}</h3>
+      <p class="modal-message">{{ data?.message }}</p>
+    </div>
+
+    <div class="modal-footer">
+      <button 
+        class="confirm-button" 
+        (click)="onConfirm()"
+      >
+        {{ data?.confirmText || 'OK' }}
+      </button>
+      
+      <button 
+        *ngIf="data?.showCancel"
+        class="cancel-button" 
+        (click)="onCancel()"
+      >
+        {{ data?.cancelText || 'Cancel' }}
+      </button>
+    </div>
+  </div>
+</div>

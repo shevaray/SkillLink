@@ -250,6 +250,17 @@
               <!-- Skills to Teach -->
               <div class="col-12 mb-3">
                 <label class="form-label">Skills I Offer *</label>
+                
+                <!-- Current Selected Skills to Teach -->
+                <div *ngIf="!loadingSkills && selectedSkillsToTeach.length > 0" class="current-skills-container mb-3">
+                  <h6 class="current-skills-title">Currently Teaching:</h6>
+                  <div class="current-skills-tags">
+                    <span *ngFor="let skillId of selectedSkillsToTeach" class="skill-tag teach-tag">
+                      {{ getSkillNameById(skillId) }}
+                    </span>
+                  </div>
+                </div>
+                
                 <div *ngIf="loadingSkills" class="text-center py-3">
                   <div class="spinner-border spinner-border-sm text-primary"></div>
                   <span class="ms-2">Loading skills...</span>
@@ -274,6 +285,17 @@
               <!-- Skills to Learn -->
               <div class="col-12 mb-3">
                 <label class="form-label">Skills I Want to Learn *</label>
+                
+                <!-- Current Selected Skills to Learn -->
+                <div *ngIf="!loadingSkills && selectedSkillsToLearn.length > 0" class="current-skills-container mb-3">
+                  <h6 class="current-skills-title">Currently Learning:</h6>
+                  <div class="current-skills-tags">
+                    <span *ngFor="let skillId of selectedSkillsToLearn" class="skill-tag learn-tag">
+                      {{ getSkillNameById(skillId) }}
+                    </span>
+                  </div>
+                </div>
+                
                 <div *ngIf="loadingSkills" class="text-center py-3">
                   <div class="spinner-border spinner-border-sm text-primary"></div>
                   <span class="ms-2">Loading skills...</span>
@@ -438,6 +460,49 @@
 .add-picture-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* Current Skills Display */
+.current-skills-container {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.current-skills-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.5rem;
+}
+
+.current-skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.teach-tag {
+  background-color: #e7f3ff;
+  color: #0056b3;
+  border-color: #b3d9ff;
+}
+
+.learn-tag {
+  background-color: #f0f9e8;
+  color: #2d5e2d;
+  border-color: #a3d977;
 }
 </style>
 

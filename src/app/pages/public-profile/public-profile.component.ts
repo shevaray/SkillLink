@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatchesService, Match } from '../../services/matches.service';
+import { NotificationService } from '../../services/notification.service';
 
 interface UserProfile {
   id: string;
@@ -36,7 +37,8 @@ export class PublicProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
-    private matchesService: MatchesService
+    private matchesService: MatchesService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -208,7 +210,7 @@ export class PublicProfileComponent implements OnInit {
     if (this.userProfile) {
       console.log('Opening message for:', this.userProfile.name);
       // In a real application, this would open a messaging interface
-      alert('Message feature coming soon!');
+              this.notificationService.showInfo('Message feature coming soon!');
       this.showConnectModal = false;
     }
   }
